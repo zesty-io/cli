@@ -10,13 +10,33 @@ Node is the ideal base, as its expected that our developers will have Node and N
 Ideally, extensions on code editors like atom or VScode would call to the command line rather than having the same logic built into each extension. This same pattern would also empower CI flows.
 
 
-## Important Commands
+## First Commands
 
-* authenticate
-* call and see instances (like kube get pods)
-* instantiate a folder that creates a zesty.json by asking for instance zuid
-* pull existing project with a folder that has a zesty.json
-* push existing folder that has a zesty.json
+
+`zutils auth`
+Prompts user name, password, 2fa flow
+
+`zutils get instances`
+lists all instances name, status, preview and live domains, and zuid
+
+`zutils init` 
+Asks for instance zuid, Creates zesty.json in that folder, pulls down file structure
+
+`zutils pull` 
+Checks for zesty.json, pulls any new files. Updates Zesty.json. Lists our any collisions
+
+  `zutils pull -o` 
+   Overwrites all files, updates zesty.josn.
+
+`zutils push` 
+Checks for zesty.json Saves all files to zesty.io instance.
+
+`zutils push --filename=xyz` 
+Saves single file to zesty.io instance.
+
+`zutils publish --filename=xyz` 
+Saves and Publishes single file from local to zesty.io instance.
+
 
 ## Misc
 - [ ] Evaluate tools for building CLI
