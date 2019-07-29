@@ -1,12 +1,5 @@
-# cli
+# Zesty.io CLI
 CLI for interacting with Zesty.io services
-
-## TODO
-- [ ] Evaluate tools for building CLI
-  - [ ] https://oclif.io/
-  - [ ] https://www.npmjs.com/package/inquirer
-  - [X] https://github.com/spf13/cobra (this requires go installed)
-
 
 ## Specfication
 
@@ -24,3 +17,9 @@ Ideally, extensions on code editors like atom or VScode would call to the comman
 * instantiate a folder that creates a zesty.json by asking for instance zuid
 * pull existing project with a folder that has a zesty.json
 * push existing folder that has a zesty.json
+
+## Misc
+- [ ] Evaluate tools for building CLI
+  - [ ] https://oclif.io/
+  - [ ] https://www.npmjs.com/package/inquirer
+  - [X] https://github.com/spf13/cobra (this requires go installed)
