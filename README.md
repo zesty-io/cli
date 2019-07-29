@@ -5,17 +5,17 @@ CLI for interacting with Zesty.io services
 - [ ] Evaluate tools for building CLI
   - [ ] https://oclif.io/
   - [ ] https://www.npmjs.com/package/inquirer
-  - [ ] https://github.com/spf13/cobra
+  - [X] https://github.com/spf13/cobra (this requires go installed)
 
 
 ## Specfication
 
 The goal of the CLi is to empower developers with tooling and power tooling, like IDE extensions, to call the cli.
 
-Ideally our CLI would be an installable binary and not require a user to have node or go installed on their machine.
+Node is the ideal base, as its expected that our developers will have Node and NPM installed
 
 
-## Top Commands
+## Important Commands
 
 * authenticate
 * call and see instances (like kube get pods)
