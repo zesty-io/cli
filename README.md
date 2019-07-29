@@ -3,11 +3,11 @@ CLI for interacting with Zesty.io services
 
 ## Specfication
 
-The goal of the CLi is to empower developers with tooling and power tooling, like IDE extensions, to call the cli.
+The goal of the CLi is to empower developers with tooling and to power tooling like IDE extensions to call the cli.
 
 Node is the ideal base, as its expected that our developers will have Node and NPM installed
 
-Ideally, extensions on code editors like atom or VScode would call to the command line rather than having the same logic built into each extension. This same pattern would also empower CI flows.
+IDE/code editor extensions like Atom or VScode would ideally call to the command line rather than having the same logic built into each extension. This same pattern would also empower CI flows.
 
 
 ## List of Commands
