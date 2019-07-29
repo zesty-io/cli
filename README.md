@@ -14,6 +14,8 @@ The goal of the CLi is to empower developers with tooling and power tooling, lik
 
 Node is the ideal base, as its expected that our developers will have Node and NPM installed
 
+Ideally, extensions on code editors like atom or VScode would call to the command line rather than having the same logic built into each extension. This same pattern would also empower CI flows.
+
 
 ## Important Commands
 
