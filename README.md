@@ -10,7 +10,8 @@ Node is the ideal base, as its expected that our developers will have Node and N
 Ideally, extensions on code editors like atom or VScode would call to the command line rather than having the same logic built into each extension. This same pattern would also empower CI flows.
 
 
-## First Commands
+## List of Commands
+Please contributes command ideas here:
 
 
 `zutils auth`
