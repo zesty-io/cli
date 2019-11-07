@@ -1,3 +1,77 @@
+cli
+===
+
+CLI for interacting with Zesty.io services
+
+[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
+[![Version](https://img.shields.io/npm/v/cli.svg)](https://npmjs.org/package/cli)
+[![Downloads/week](https://img.shields.io/npm/dw/cli.svg)](https://npmjs.org/package/cli)
+[![License](https://img.shields.io/npm/l/cli.svg)](https://github.com/[object Object]/blob/master/package.json)
+
+<!-- toc -->
+* [Usage](#usage)
+* [Commands](#commands)
+<!-- tocstop -->
+# Usage
+<!-- usage -->
+```sh-session
+$ npm install -g @zesty-io/cli
+$ zesty COMMAND
+running command...
+$ zesty (-v|--version|version)
+cli/1.0.0 linux-x64 node-v10.16.3
+$ zesty --help [COMMAND]
+USAGE
+  $ zesty COMMAND
+...
+```
+<!-- usagestop -->
+# Commands
+<!-- commands -->
+* [`zesty hello [FILE]`](#zesty-hello-file)
+* [`zesty help [COMMAND]`](#zesty-help-command)
+
+## `zesty hello [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ zesty hello [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+
+EXAMPLE
+  $ zesty hello
+  hello world from ./src/hello.ts!
+```
+
+_See code: [src/commands/hello.ts](https://github.com/zesty-io/cli/blob/v1.0.0/src/commands/hello.ts)_
+
+## `zesty help [COMMAND]`
+
+display help for zesty
+
+```
+USAGE
+  $ zesty help [COMMAND]
+
+ARGUMENTS
+  COMMAND  command to show help for
+
+OPTIONS
+  --all  see all commands in CLI
+```
+
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.1/src/commands/help.ts)_
+<!-- commandsstop -->
+
+
+
+
 # Zesty.io CLI
 CLI for interacting with Zesty.io services
 
@@ -14,28 +88,28 @@ IDE/code editor extensions like Atom or VScode would ideally call to the command
 Please contributes command ideas here:
 
 
-`zutils auth`
+`zesty auth`
 Prompts user name, password, 2fa flow
 
-`zutils get instances`
+`zesty get instances`
 lists all instances name, status, preview and live domains, and zuid
 
-`zutils init` 
+`zesty init` 
 Asks for instance zuid, Creates zesty.json in that folder, pulls down file structure
 
-`zutils pull` 
+`zesty pull` 
 Checks for zesty.json, pulls any new files. Updates Zesty.json. Lists our any collisions
 
-  `zutils pull -o` 
+  `zesty pull -o` 
    Overwrites all files, updates zesty.josn.
 
-`zutils push` 
+`zesty push` 
 Checks for zesty.json Saves all files to zesty.io instance.
 
-`zutils push --filename=xyz` 
+`zesty push --filename=xyz` 
 Saves single file to zesty.io instance.
 
-`zutils publish --filename=xyz` 
+`zesty publish --filename=xyz` 
 Saves and Publishes single file from local to zesty.io instance.
 
 
