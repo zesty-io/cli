@@ -20,7 +20,7 @@ $ npm install -g @zesty-io/cli
 $ zesty COMMAND
 running command...
 $ zesty (-v|--version|version)
-@zesty-io/cli/1.0.0 linux-x64 node-v10.16.3
+@zesty-io/cli/1.0.0 linux-x64 node-v12.13.0
 $ zesty --help [COMMAND]
 USAGE
   $ zesty COMMAND
@@ -33,6 +33,7 @@ USAGE
 * [`zesty autocomplete [SHELL]`](#zesty-autocomplete-shell)
 * [`zesty hello [FILE]`](#zesty-hello-file)
 * [`zesty help [COMMAND]`](#zesty-help-command)
+* [`zesty init [ZUID]`](#zesty-init-zuid)
 * [`zesty pull [FILE]`](#zesty-pull-file)
 
 ## `zesty auth [ZUID] [EMAIL] [PASS]`
@@ -112,6 +113,20 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.1/src/commands/help.ts)_
 
+## `zesty init [ZUID]`
+
+describe the command here
+
+```
+USAGE
+  $ zesty init [ZUID]
+
+OPTIONS
+  -h, --help  show CLI help
+```
+
+_See code: [src/commands/init.ts](https://github.com/zesty-io/cli/blob/v1.0.0/src/commands/init.ts)_
+
 ## `zesty pull [FILE]`
 
 describe the command here
@@ -147,15 +162,14 @@ IDE/code editor extensions like Atom or VScode would ideally call to the command
 ## List of Commands
 Please contributes command ideas here:
 
+`zesty init` 
+Asks for instance zuid, Creates zesty.json in that folder, pulls down file structure
 
 `zesty auth`
 Prompts user name, password, 2fa flow
 
 `zesty get instances`
 lists all instances name, status, preview and live domains, and zuid
-
-`zesty init` 
-Asks for instance zuid, Creates zesty.json in that folder, pulls down file structure
 
 `zesty pull` 
 Checks for zesty.json, pulls any new files. Updates Zesty.json. Lists our any collisions
