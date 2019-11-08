@@ -2,6 +2,8 @@ import { Command, flags } from "@oclif/command";
 import * as notifier from 'node-notifier'
 import cli from 'cli-ux'
 
+const input = require('listr-input');
+
 const os = require("os");
 const fs = require("fs");
 const path = require("path");
@@ -66,19 +68,53 @@ export default class Init extends Command {
         }
       },
       {
-        title: `Authenticating with ${args.zuid} instance`,
+        title: `Authenticate with ${args.zuid} instance`,
         enabled: () => args.zuid,
-        task: async () => {
-
-          const email = await cli.prompt('Enter your Zesty.io user account email')
-          const pass = await cli.prompt('Enter your Zesty.io user account password')
-
-          execa(`zesty auth ${email} ${pass}`)
-            .catch((err) => {
-              console.error(err)
-              throw err
-            })
+        task: () => {
+          return new Listr([
+            {
+              title: "Enter your account email",
+              task: (ctx) => input('email', {
+                validate: value => value.length > 0,
+                done: email => ctx.email = email
+              })
+            },
+            {
+              title: "Enter your account password",
+              task: (ctx) => input('password', {
+                secret: true,
+                validate: value => value.length > 0,
+                done: pass => ctx.pass = pass
+              })
+            },
+            {
+              title: "Connecting to instance",
+              task: (ctx) => {
+                return execa(`zesty auth ${args.zuid} ${ctx.email} ${ctx.pass}`)
+                  .catch((err) => {
+                    // console.error(err)
+                    throw err
+                  })
+              }
+            }
+          ])
         }
+        // task: () => {
+
+        //   return promptly.prompt('Name: ')
+        //     .then(name => {
+        //       console.log(name);
+        //     });
+
+        //   // const email = await cli.prompt('Enter your Zesty.io user account email')
+        //   // const pass = await cli.prompt('Enter your Zesty.io user account password', {type: 'hide'})
+
+        //   // execa(`zesty auth ${email} ${pass}`)
+        //   //   .catch((err) => {
+        //   //     console.error(err)
+        //   //     throw err
+        //   //   })
+        // }
       },
       {
         title: 'Pulling Instance Files',
@@ -96,7 +132,7 @@ export default class Init extends Command {
           })
         }
       }
-    ], {concurrent: false});
+    ]);
 
     tasks.run().catch(err => {
       console.error(err);
