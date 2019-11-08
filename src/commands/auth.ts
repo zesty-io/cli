@@ -1,7 +1,9 @@
 import { Command, flags } from '@oclif/command'
+import cli from 'cli-ux'
+import chalk from 'chalk'
+
 // import SDK from "@zesty-io/sdk"
 const SDK = require("@zesty-io/sdk")
-
 
 export default class Auth extends Command {
   static description = 'Command for authenticating with a Zesty.io instance'
@@ -37,21 +39,32 @@ export default class Auth extends Command {
     }
 
     try {
+      cli.action.start('Authenticating with instance')
+
       // Get authenticated session
       const auth = new SDK.Auth();
       const session = await auth.login(args.email, args.pass);
+      if (session.token) {
 
-      // Instantiate sdk instance with instance ZUID and authenticated session token
-      const sdk = new SDK(args.zuid, session.token);
+        // Instantiate sdk instance with instance ZUID and authenticated session token
+        const sdk = new SDK(args.zuid, session.token);
 
-      // Request instance data
-      const res = await sdk.instance.getModels();
+        // Verify token
+        const res = await sdk.auth.verifyToken(session.token);
 
-      // View our response data in the console
-      console.log(res);
+        if (res.code === 200) {
+          console.log(chalk.green(`Authenticated!`))
+        } else {
+          console.log(chalk.red(`Failed to authenticate. ${res.message}`))
+        }
 
-    } catch (error) {
-      console.log(error);
+      } else {
+        this.warn(chalk.yellow(session.message))
+      }
+
+      cli.action.stop()
+    } catch (err) {
+      console.error(err);
     }
   }
 }
