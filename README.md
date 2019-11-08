@@ -11,6 +11,7 @@ CLI for interacting with Zesty.io services
 <!-- toc -->
 * [Usage](#usage)
 * [Commands](#commands)
+* [Zesty.io CLI](#zestyio-cli)
 <!-- tocstop -->
 # Usage
 <!-- usage -->
@@ -19,7 +20,7 @@ $ npm install -g @zesty-io/cli
 $ zesty COMMAND
 running command...
 $ zesty (-v|--version|version)
-cli/1.0.0 linux-x64 node-v10.16.3
+@zesty-io/cli/1.0.0 linux-x64 node-v10.16.3
 $ zesty --help [COMMAND]
 USAGE
   $ zesty COMMAND
@@ -28,8 +29,51 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`zesty auth [ZUID] [EMAIL] [PASS]`](#zesty-auth-zuid-email-pass)
+* [`zesty autocomplete [SHELL]`](#zesty-autocomplete-shell)
 * [`zesty hello [FILE]`](#zesty-hello-file)
 * [`zesty help [COMMAND]`](#zesty-help-command)
+* [`zesty pull [FILE]`](#zesty-pull-file)
+
+## `zesty auth [ZUID] [EMAIL] [PASS]`
+
+Command for authenticating with a Zesty.io instance
+
+```
+USAGE
+  $ zesty auth [ZUID] [EMAIL] [PASS]
+
+OPTIONS
+  -h, --help  show CLI help
+
+EXAMPLE
+  $ zesty auth 8-000-0000 user@example.com strong-password-for-security
+```
+
+_See code: [src/commands/auth.ts](https://github.com/zesty-io/cli/blob/v1.0.0/src/commands/auth.ts)_
+
+## `zesty autocomplete [SHELL]`
+
+display autocomplete installation instructions
+
+```
+USAGE
+  $ zesty autocomplete [SHELL]
+
+ARGUMENTS
+  SHELL  shell type
+
+OPTIONS
+  -r, --refresh-cache  Refresh cache (ignores displaying instructions)
+
+EXAMPLES
+  $ zesty autocomplete
+  $ zesty autocomplete bash
+  $ zesty autocomplete zsh
+  $ zesty autocomplete --refresh-cache
+```
+
+_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.1.4/src/commands/autocomplete/index.ts)_
 
 ## `zesty hello [FILE]`
 
@@ -67,6 +111,22 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.1/src/commands/help.ts)_
+
+## `zesty pull [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ zesty pull [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/pull.ts](https://github.com/zesty-io/cli/blob/v1.0.0/src/commands/pull.ts)_
 <!-- commandsstop -->
 
 
