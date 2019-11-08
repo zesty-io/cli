@@ -1,7 +1,7 @@
 {
   "name": "@zesty-io/cli",
   "description": "CLI for interacting with Zesty.io services",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "author": "Zesty.io",
   "contributors": [
     "Stuart Runyan<stuart@zesty.io>"
@@ -22,7 +22,6 @@
     "@zesty-io/sdk": "0.0.9",
     "chalk": "^2.4.2",
     "cli-ux": "^5.3.3",
-    "execa": "^3.2.0",
     "listr": "^0.14.3",
     "listr-input": "^0.2.0",
     "node-notifier": "^6.0.0",

@@ -17,9 +17,21 @@ export default class Auth extends Command {
   }
 
   static args = [
-    { name: 'zuid' },
-    { name: 'email' },
-    { name: 'pass' }
+    {
+      name: 'zuid',
+      required: true,
+      description: "ZUID of the instance you want to connect with"
+    },
+    {
+      name: 'email',
+      required: true,
+      description: "Your user account email"
+    },
+    {
+      name: 'pass',
+      required: true,
+      description: "Your user account password"
+    }
   ]
 
   async run() {

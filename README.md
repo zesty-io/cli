@@ -20,7 +20,7 @@ $ npm install -g @zesty-io/cli
 $ zesty COMMAND
 running command...
 $ zesty (-v|--version|version)
-@zesty-io/cli/1.0.0 linux-x64 node-v10.16.3
+@zesty-io/cli/0.0.1 linux-x64 node-v12.13.0
 $ zesty --help [COMMAND]
 USAGE
   $ zesty COMMAND
@@ -29,25 +29,23 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-- [cli](#cli)
-- [Usage](#usage)
-- [Commands](#commands)
-  - [`zesty auth [ZUID] [EMAIL] [PASS]`](#zesty-auth-zuid-email-pass)
-  - [`zesty autocomplete [SHELL]`](#zesty-autocomplete-shell)
-  - [`zesty help [COMMAND]`](#zesty-help-command)
-  - [`zesty init [FILE]`](#zesty-init-file)
-- [Zesty.io CLI](#zestyio-cli)
-  - [Specfication](#specfication)
-  - [List of Commands](#list-of-commands)
-  - [Misc](#misc)
+* [`zesty auth ZUID EMAIL PASS`](#zesty-auth-zuid-email-pass)
+* [`zesty autocomplete [SHELL]`](#zesty-autocomplete-shell)
+* [`zesty help [COMMAND]`](#zesty-help-command)
+* [`zesty init [ZUID]`](#zesty-init-zuid)
 
-## `zesty auth [ZUID] [EMAIL] [PASS]`
+## `zesty auth ZUID EMAIL PASS`
 
 Command for authenticating with a Zesty.io instance
 
 ```
 USAGE
-  $ zesty auth [ZUID] [EMAIL] [PASS]
+  $ zesty auth ZUID EMAIL PASS
+
+ARGUMENTS
+  ZUID   ZUID of the instance you want to connect with
+  EMAIL  Your user account email
+  PASS   Your user account password
 
 OPTIONS
   -h, --help  show CLI help
@@ -56,7 +54,7 @@ EXAMPLE
   $ zesty auth 8-000-0000 user@example.com strong-password-for-security
 ```
 
-_See code: [src/commands/auth.ts](https://github.com/zesty-io/cli/blob/v1.0.0/src/commands/auth.ts)_
+_See code: [src/commands/auth.ts](https://github.com/zesty-io/cli/blob/v0.0.1/src/commands/auth.ts)_
 
 ## `zesty autocomplete [SHELL]`
 
@@ -81,9 +79,6 @@ EXAMPLES
 
 _See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.1.4/src/commands/autocomplete/index.ts)_
 
-
-_See code: [src/commands/hello.ts](https://github.com/zesty-io/cli/blob/v1.0.0/src/commands/hello.ts)_
-
 ## `zesty help [COMMAND]`
 
 display help for zesty
@@ -101,21 +96,19 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.1/src/commands/help.ts)_
 
-## `zesty init [FILE]`
+## `zesty init [ZUID]`
 
 describe the command here
 
 ```
 USAGE
-  $ zesty init [FILE]
+  $ zesty init [ZUID]
 
 OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  -h, --help  show CLI help
 ```
 
-_See code: [src/commands/init.ts](https://github.com/zesty-io/cli/blob/v1.0.0/src/commands/init.ts)_
+_See code: [src/commands/init.ts](https://github.com/zesty-io/cli/blob/v0.0.1/src/commands/init.ts)_
 <!-- commandsstop -->
 
 

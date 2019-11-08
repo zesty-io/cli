@@ -1,15 +1,13 @@
 import { Command, flags } from "@oclif/command";
-import * as notifier from 'node-notifier'
-import cli from 'cli-ux'
+
+import Auth from './auth'
 
 const input = require('listr-input');
-
-const os = require("os");
 const fs = require("fs");
 const path = require("path");
-const execa = require("execa");
 const Listr = require("listr");
 const chalk = require("chalk");
+const notifier = require("node-notifier")
 
 export default class Init extends Command {
   static description = "describe the command here";
@@ -90,31 +88,11 @@ export default class Init extends Command {
             {
               title: "Connecting to instance",
               task: (ctx) => {
-                return execa(`zesty auth ${args.zuid} ${ctx.email} ${ctx.pass}`)
-                  .catch((err) => {
-                    // console.error(err)
-                    throw err
-                  })
+                return Auth.run([args.zuid, ctx.email, ctx.pass])
               }
             }
           ])
         }
-        // task: () => {
-
-        //   return promptly.prompt('Name: ')
-        //     .then(name => {
-        //       console.log(name);
-        //     });
-
-        //   // const email = await cli.prompt('Enter your Zesty.io user account email')
-        //   // const pass = await cli.prompt('Enter your Zesty.io user account password', {type: 'hide'})
-
-        //   // execa(`zesty auth ${email} ${pass}`)
-        //   //   .catch((err) => {
-        //   //     console.error(err)
-        //   //     throw err
-        //   //   })
-        // }
       },
       {
         title: 'Pulling Instance Files',
@@ -128,7 +106,7 @@ export default class Init extends Command {
         task: () => {
           notifier.notify({
             title: 'Zesty.io CLI',
-            message: args.zuid ? `Initialized with instance ${args.zuid}` : `Initialized`
+            message: args.zuid ? `Initialized instance ${args.zuid}` : `Initialized`
           })
         }
       }
