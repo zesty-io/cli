@@ -3,6 +3,9 @@
   "description": "CLI for interacting with Zesty.io services",
   "version": "1.0.0",
   "author": "Zesty.io",
+  "contributors": [
+    "Stuart Runyan<stuart@zesty.io>"
+  ],
   "bin": {
     "zesty": "./bin/run"
   },
@@ -12,7 +15,11 @@
   "dependencies": {
     "@oclif/command": "^1.5.19",
     "@oclif/config": "^1.13.3",
+    "@oclif/plugin-autocomplete": "^0.1.4",
     "@oclif/plugin-help": "^2.2.1",
+    "@oclif/plugin-not-found": "^1.2.3",
+    "@oclif/plugin-warn-if-update-available": "^1.7.0",
+    "@zesty-io/sdk": "0.0.9",
     "tslib": "^1.10.0"
   },
   "devDependencies": {
@@ -43,7 +50,10 @@
     "commands": "./lib/commands",
     "bin": "zesty",
     "plugins": [
-      "@oclif/plugin-help"
+      "@oclif/plugin-help",
+      "@oclif/plugin-autocomplete",
+      "@oclif/plugin-not-found",
+      "@oclif/plugin-warn-if-update-available"
     ]
   },
   "repository": {

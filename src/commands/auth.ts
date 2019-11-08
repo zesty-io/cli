@@ -1,33 +1,57 @@
-import {Command, flags} from '@oclif/command'
+import { Command, flags } from '@oclif/command'
+// import SDK from "@zesty-io/sdk"
+const SDK = require("@zesty-io/sdk")
+
 
 export default class Auth extends Command {
   static description = 'Command for authenticating with a Zesty.io instance'
 
   static examples = [
-    `$ zesty auth --email=user@example.com --pass=strong-password-for-security`,
+    `$ zesty auth 8-000-0000 user@example.com strong-password-for-security`,
   ]
 
   static flags = {
-    help: flags.help({char: 'h'}),
-    
-    // flag with a value (-e, --email=VALUE)
-    email: flags.string({char: 'e', description: 'Email to login with'}),
-
-    // flag with a value (-p, --pass=VALUE)
-    pass: flags.string({char: 'p', description: 'Password to login with'})
-    
+    help: flags.help({ char: 'h' }),
   }
 
-  static args = [{name: 'file'}]
+  static args = [
+    { name: 'zuid' },
+    { name: 'email' },
+    { name: 'pass' }
+  ]
 
   async run() {
-    const {args, flags} = this.parse(Auth)
+    const { args } = this.parse(Auth)
 
-    // const name = flags.name || 'world'
-    // this.log(`hello ${name} from ./src/commands/hello.ts`)
+    if (!args.zuid) {
+      console.log(`Missing required zuid argument. Which is the ZUID for the instance you want to connect to.`);
+      return
+    }
+    if (!args.email) {
+      console.log(`Missing required email argument. Which is the email for the account you want to connect with.`);
+      return
+    }
+    if (!args.pass) {
+      console.log(`Missing required pass argument. Which is the password for the account you want to connect with.`);
+      return
+    }
 
-    if (args.file && flags.force) {
-      this.log(`you input --force and --file: ${args.file}`)
+    try {
+      // Get authenticated session
+      const auth = new SDK.Auth();
+      const session = await auth.login(args.email, args.pass);
+
+      // Instantiate sdk instance with instance ZUID and authenticated session token
+      const sdk = new SDK(args.zuid, session.token);
+
+      // Request instance data
+      const res = await sdk.instance.getModels();
+
+      // View our response data in the console
+      console.log(res);
+
+    } catch (error) {
+      console.log(error);
     }
   }
 }
