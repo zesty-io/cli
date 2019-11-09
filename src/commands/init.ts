@@ -29,7 +29,7 @@ export default class Init extends Command {
             // Make config dir
             fs.mkdir(this.config.configDir, {
               recursive: true
-            }, err => {
+            }, (err: { code: string; }) => {
               if (err && err.code !== "EEXIST") {
                 throw err
               }
@@ -37,7 +37,7 @@ export default class Init extends Command {
               // If zuid was provided create dir for that instance and setup config file
               if (args.zuid) {
                 const instancedir = path.resolve(this.config.configDir, args.zuid);
-                fs.mkdir(instancedir, err => {
+                fs.mkdir(instancedir, (err: { code: string; }) => {
                   if (err && err.code !== "EEXIST") {
                     throw err
                   }
@@ -46,7 +46,7 @@ export default class Init extends Command {
                   fs.writeFile(
                     path.resolve(instancedir, "config.json"),
                     `{"INSTANCE_ZUID: "${args.zuid}"}`,
-                    err => {
+                    (                    err: { code: string; }) => {
                       if (err && err.code !== "EEXIST") {
                         throw err
                       }
@@ -72,22 +72,22 @@ export default class Init extends Command {
           return new Listr([
             {
               title: "Enter your account email",
-              task: (ctx) => input('email', {
-                validate: value => value.length > 0,
-                done: email => ctx.email = email
+              task: (ctx: { email: any; }) => input('email', {
+                validate: (value: { length: number; }) => value.length > 0,
+                done: (email: any) => ctx.email = email
               })
             },
             {
               title: "Enter your account password",
-              task: (ctx) => input('password', {
+              task: (ctx: { pass: any; }) => input('password', {
                 secret: true,
-                validate: value => value.length > 0,
-                done: pass => ctx.pass = pass
+                validate: (value: { length: number; }) => value.length > 0,
+                done: (pass: any) => ctx.pass = pass
               })
             },
             {
               title: "Connecting to instance",
-              task: (ctx) => {
+              task: (ctx: { email: string; pass: string; }) => {
                 return Auth.run([args.zuid, ctx.email, ctx.pass])
               }
             }
@@ -112,7 +112,7 @@ export default class Init extends Command {
       }
     ]);
 
-    tasks.run().catch(err => {
+    tasks.run().catch((err: any) => {
       console.error(err);
     });
   }
