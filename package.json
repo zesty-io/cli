@@ -32,6 +32,7 @@
     "@oclif/tslint": "^3.1.1",
     "@types/node": "^10.17.4",
     "globby": "^10.0.1",
+    "oclif": "^1.15.2",
     "ts-node": "^8.4.1",
     "tslint": "^5.20.1",
     "typescript": "^3.7.2"
