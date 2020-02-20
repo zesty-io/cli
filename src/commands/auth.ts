@@ -38,15 +38,15 @@ export default class Auth extends Command {
     const { args } = this.parse(Auth)
 
     if (!args.zuid) {
-      console.log(`Missing required zuid argument. Which is the ZUID for the instance you want to connect to.`);
+      this.warn(`Missing required zuid argument. Which is the ZUID for the instance you want to connect to.`);
       return
     }
     if (!args.email) {
-      console.log(`Missing required email argument. Which is the email for the account you want to connect with.`);
+      this.warn(`Missing required email argument. Which is the email for the account you want to connect with.`);
       return
     }
     if (!args.pass) {
-      console.log(`Missing required pass argument. Which is the password for the account you want to connect with.`);
+      this.warn(`Missing required pass argument. Which is the password for the account you want to connect with.`);
       return
     }
 
@@ -65,14 +65,17 @@ export default class Auth extends Command {
         const res = await sdk.auth.verifyToken(session.token);
 
         if (res.code === 200) {
-          console.log(chalk.green(`Authenticated!`))
+          this.log('Authenticated!')
+          this.log(`TOKEN: ${chalk.green(session.token)}`)
+
         } else {
-          console.log(chalk.red(`Failed to authenticate. ${res.message}`))
+          this.log(chalk.red(`Failed to authenticate. ${res.message}`))
         }
 
       } else {
         this.warn(chalk.yellow(session.message))
       }
+
 
       cli.action.stop()
     } catch (err) {

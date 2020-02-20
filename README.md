@@ -1,5 +1,4 @@
-cli
-===
+# cli
 
 CLI for interacting with Zesty.io services
 
@@ -9,30 +8,46 @@ CLI for interacting with Zesty.io services
 [![License](https://img.shields.io/npm/l/cli.svg)](https://github.com/[object Object]/blob/master/package.json)
 
 <!-- toc -->
-* [Usage](#usage)
-* [Commands](#commands)
-* [Zesty.io CLI](#zestyio-cli)
-<!-- tocstop -->
+- [Usage](#usage)
+- [Commands](#commands)
+- [Zesty.io CLI](#zestyio-cli)
+  <!-- tocstop -->
+
 # Usage
+
 <!-- usage -->
+
 ```sh-session
 $ npm install -g @zesty-io/cli
 $ zesty COMMAND
 running command...
+
 $ zesty (-v|--version|version)
 @zesty-io/cli/0.0.1 linux-x64 node-v12.13.0
+
 $ zesty --help [COMMAND]
 USAGE
   $ zesty COMMAND
 ...
 ```
+
 <!-- usagestop -->
+
 # Commands
+
 <!-- commands -->
-* [`zesty auth ZUID EMAIL PASS`](#zesty-auth-zuid-email-pass)
-* [`zesty autocomplete [SHELL]`](#zesty-autocomplete-shell)
-* [`zesty help [COMMAND]`](#zesty-help-command)
-* [`zesty init [ZUID]`](#zesty-init-zuid)
+
+- [cli](#cli)
+- [Usage](#usage)
+- [Commands](#commands)
+  - [`zesty auth ZUID EMAIL PASS`](#zesty-auth-zuid-email-pass)
+  - [`zesty autocomplete [SHELL]`](#zesty-autocomplete-shell)
+  - [`zesty help [COMMAND]`](#zesty-help-command)
+  - [`zesty init [ZUID]`](#zesty-init-zuid)
+- [Zesty.io CLI](#zestyio-cli)
+  - [Specfication](#specfication)
+  - [List of Commands](#list-of-commands)
+  - [Misc](#misc)
 
 ## `zesty auth ZUID EMAIL PASS`
 
@@ -109,12 +124,11 @@ OPTIONS
 ```
 
 _See code: [src/commands/init.ts](https://github.com/zesty-io/cli/blob/v0.0.1/src/commands/init.ts)_
+
 <!-- commandsstop -->
 
-
-
-
 # Zesty.io CLI
+
 CLI for interacting with Zesty.io services
 
 ## Specfication
@@ -125,11 +139,11 @@ Node is the ideal base, as its expected that our developers will have Node and N
 
 IDE/code editor extensions like Atom or VScode would ideally call to the command line rather than having the same logic built into each extension. This same pattern would also empower CI flows.
 
-
 ## List of Commands
+
 Please contributes command ideas here:
 
-`zesty init` 
+`zesty init`
 Asks for instance zuid, Creates zesty.json in that folder, pulls down file structure
 
 `zesty auth`
@@ -138,24 +152,24 @@ Prompts user name, password, 2fa flow
 `zesty get instances`
 lists all instances name, status, preview and live domains, and zuid
 
-`zesty pull` 
+`zesty pull`
 Checks for zesty.json, pulls any new files. Updates Zesty.json. Lists our any collisions
 
-  `zesty pull -o` 
-   Overwrites all files, updates zesty.josn.
+`zesty pull -o`
+Overwrites all files, updates zesty.josn.
 
-`zesty push` 
+`zesty push`
 Checks for zesty.json Saves all files to zesty.io instance.
 
-`zesty push --filename=xyz` 
+`zesty push --filename=xyz`
 Saves single file to zesty.io instance.
 
-`zesty publish --filename=xyz` 
+`zesty publish --filename=xyz`
 Saves and Publishes single file from local to zesty.io instance.
 
-
 ## Misc
+
 - [ ] Evaluate tools for building CLI
   - [ ] https://oclif.io/
   - [ ] https://www.npmjs.com/package/inquirer
-  - [X] https://github.com/spf13/cobra (this requires go installed)
+  - [x] https://github.com/spf13/cobra (this requires go installed)
