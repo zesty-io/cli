@@ -33,19 +33,32 @@ USAGE
 # Commands
 
 <!-- commands -->
-* [`zesty auth ZUID EMAIL PASS`](#zesty-auth-zuid-email-pass)
+* [`zesty auth`](#zesty-auth)
+* [`zesty auth:login ZUID EMAIL PASS`](#zesty-authlogin-zuid-email-pass)
 * [`zesty autocomplete [SHELL]`](#zesty-autocomplete-shell)
 * [`zesty help [COMMAND]`](#zesty-help-command)
 * [`zesty init [ZUID]`](#zesty-init-zuid)
-* [`zesty instance:create [FILE]`](#zesty-instancecreate-file)
+* [`zesty instance:create [NAME]`](#zesty-instancecreate-name)
 
-## `zesty auth ZUID EMAIL PASS`
+## `zesty auth`
+
+```
+USAGE
+  $ zesty auth
+
+OPTIONS
+  -h, --help  show CLI help
+```
+
+_See code: [src/commands/auth.ts](https://github.com/zesty-io/cli/blob/v0.0.1/src/commands/auth.ts)_
+
+## `zesty auth:login ZUID EMAIL PASS`
 
 Command for authenticating with a Zesty.io instance
 
 ```
 USAGE
-  $ zesty auth ZUID EMAIL PASS
+  $ zesty auth:login ZUID EMAIL PASS
 
 ARGUMENTS
   ZUID   ZUID of the instance you want to connect with
@@ -59,7 +72,7 @@ EXAMPLE
   $ zesty auth 8-000-0000 user@example.com strong-password-for-security
 ```
 
-_See code: [src/commands/auth.ts](https://github.com/zesty-io/cli/blob/v0.0.1/src/commands/auth.ts)_
+_See code: [src/commands/auth/login.ts](https://github.com/zesty-io/cli/blob/v0.0.1/src/commands/auth/login.ts)_
 
 ## `zesty autocomplete [SHELL]`
 
@@ -115,18 +128,19 @@ OPTIONS
 
 _See code: [src/commands/init.ts](https://github.com/zesty-io/cli/blob/v0.0.1/src/commands/init.ts)_
 
-## `zesty instance:create [FILE]`
+## `zesty instance:create [NAME]`
 
-describe the command here
+Creates a new instance on Zesty.io
 
 ```
 USAGE
-  $ zesty instance:create [FILE]
+  $ zesty instance:create [NAME]
+
+ARGUMENTS
+  NAME  name to use for instance
 
 OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  -h, --help  show CLI help
 ```
 
 _See code: [src/commands/instance/create.ts](https://github.com/zesty-io/cli/blob/v0.0.1/src/commands/instance/create.ts)_
