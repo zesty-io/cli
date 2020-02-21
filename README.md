@@ -8,46 +8,36 @@ CLI for interacting with Zesty.io services
 [![License](https://img.shields.io/npm/l/cli.svg)](https://github.com/[object Object]/blob/master/package.json)
 
 <!-- toc -->
-- [Usage](#usage)
-- [Commands](#commands)
-- [Zesty.io CLI](#zestyio-cli)
-  <!-- tocstop -->
+* [cli](#cli)
+* [Usage](#usage)
+* [Commands](#commands)
+* [Zesty.io CLI](#zestyio-cli)
+<!-- tocstop -->
 
 # Usage
 
 <!-- usage -->
-
 ```sh-session
 $ npm install -g @zesty-io/cli
 $ zesty COMMAND
 running command...
-
 $ zesty (-v|--version|version)
-@zesty-io/cli/0.0.1 linux-x64 node-v12.13.0
-
+@zesty-io/cli/0.0.1 linux-x64 node-v12.16.0
 $ zesty --help [COMMAND]
 USAGE
   $ zesty COMMAND
 ...
 ```
-
 <!-- usagestop -->
 
 # Commands
 
 <!-- commands -->
-
-- [cli](#cli)
-- [Usage](#usage)
-- [Commands](#commands)
-  - [`zesty auth ZUID EMAIL PASS`](#zesty-auth-zuid-email-pass)
-  - [`zesty autocomplete [SHELL]`](#zesty-autocomplete-shell)
-  - [`zesty help [COMMAND]`](#zesty-help-command)
-  - [`zesty init [ZUID]`](#zesty-init-zuid)
-- [Zesty.io CLI](#zestyio-cli)
-  - [Specfication](#specfication)
-  - [List of Commands](#list-of-commands)
-  - [Misc](#misc)
+* [`zesty auth ZUID EMAIL PASS`](#zesty-auth-zuid-email-pass)
+* [`zesty auth:login [FILE]`](#zesty-authlogin-file)
+* [`zesty autocomplete [SHELL]`](#zesty-autocomplete-shell)
+* [`zesty help [COMMAND]`](#zesty-help-command)
+* [`zesty init [ZUID]`](#zesty-init-zuid)
 
 ## `zesty auth ZUID EMAIL PASS`
 
@@ -70,6 +60,22 @@ EXAMPLE
 ```
 
 _See code: [src/commands/auth.ts](https://github.com/zesty-io/cli/blob/v0.0.1/src/commands/auth.ts)_
+
+## `zesty auth:login [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ zesty auth:login [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/auth/login.ts](https://github.com/zesty-io/cli/blob/v0.0.1/src/commands/auth/login.ts)_
 
 ## `zesty autocomplete [SHELL]`
 
@@ -124,7 +130,6 @@ OPTIONS
 ```
 
 _See code: [src/commands/init.ts](https://github.com/zesty-io/cli/blob/v0.0.1/src/commands/init.ts)_
-
 <!-- commandsstop -->
 
 # Zesty.io CLI
