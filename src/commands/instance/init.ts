@@ -1,6 +1,6 @@
 import { Command, flags } from "@oclif/command";
 
-import Auth from './auth/login'
+import Auth from '../auth/login'
 
 const input = require('listr-input');
 const fs = require("fs");

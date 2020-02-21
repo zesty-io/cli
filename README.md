@@ -33,24 +33,11 @@ USAGE
 # Commands
 
 <!-- commands -->
-* [`zesty auth`](#zesty-auth)
 * [`zesty auth:login ZUID EMAIL PASS`](#zesty-authlogin-zuid-email-pass)
 * [`zesty autocomplete [SHELL]`](#zesty-autocomplete-shell)
 * [`zesty help [COMMAND]`](#zesty-help-command)
-* [`zesty init [ZUID]`](#zesty-init-zuid)
 * [`zesty instance:create [NAME]`](#zesty-instancecreate-name)
-
-## `zesty auth`
-
-```
-USAGE
-  $ zesty auth
-
-OPTIONS
-  -h, --help  show CLI help
-```
-
-_See code: [src/commands/auth.ts](https://github.com/zesty-io/cli/blob/v0.0.1/src/commands/auth.ts)_
+* [`zesty instance:init [ZUID]`](#zesty-instanceinit-zuid)
 
 ## `zesty auth:login ZUID EMAIL PASS`
 
@@ -114,20 +101,6 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.1/src/commands/help.ts)_
 
-## `zesty init [ZUID]`
-
-describe the command here
-
-```
-USAGE
-  $ zesty init [ZUID]
-
-OPTIONS
-  -h, --help  show CLI help
-```
-
-_See code: [src/commands/init.ts](https://github.com/zesty-io/cli/blob/v0.0.1/src/commands/init.ts)_
-
 ## `zesty instance:create [NAME]`
 
 Creates a new instance on Zesty.io
@@ -144,6 +117,20 @@ OPTIONS
 ```
 
 _See code: [src/commands/instance/create.ts](https://github.com/zesty-io/cli/blob/v0.0.1/src/commands/instance/create.ts)_
+
+## `zesty instance:init [ZUID]`
+
+describe the command here
+
+```
+USAGE
+  $ zesty instance:init [ZUID]
+
+OPTIONS
+  -h, --help  show CLI help
+```
+
+_See code: [src/commands/instance/init.ts](https://github.com/zesty-io/cli/blob/v0.0.1/src/commands/instance/init.ts)_
 <!-- commandsstop -->
 
 # Zesty.io CLI
@@ -162,11 +149,15 @@ IDE/code editor extensions like Atom or VScode would ideally call to the command
 
 Please contributes command ideas here:
 
-`zesty init`
+
+`zesty auth:login`
+Prompts user name, password, 2fa flow
+
+`zesty instance:init`
 Asks for instance zuid, Creates zesty.json in that folder, pulls down file structure
 
-`zesty auth`
-Prompts user name, password, 2fa flow
+`zesty instance:create`
+Creates a new instance on https://zesty.io
 
 `zesty get instances`
 lists all instances name, status, preview and live domains, and zuid
