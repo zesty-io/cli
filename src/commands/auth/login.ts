@@ -13,7 +13,7 @@ export default class Auth extends Command {
   ]
 
   static flags = {
-    help: flags.help({ char: 'h' }),
+    help: Flags.help({ char: 'h' }),
   }
 
   static args = [
@@ -34,8 +34,8 @@ export default class Auth extends Command {
     }
   ]
 
-  async run() {
-    const { args } = this.parse(Auth)
+  async run(): Promise<void> {
+    const { args } = await this.parse(Auth)
 
     if (!args.zuid) {
       this.warn(`Missing required zuid argument. Which is the ZUID for the instance you want to connect to.`);

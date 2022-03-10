@@ -29,18 +29,15 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-- [CLI](#cli)
-- [Usage](#usage)
-- [Commands](#commands)
-  - [`zesty hello PERSON`](#zesty-hello-person)
-  - [`zesty hello world`](#zesty-hello-world)
-  - [`zesty help [COMMAND]`](#zesty-help-command)
-  - [`zesty plugins`](#zesty-plugins)
-  - [`zesty plugins:inspect PLUGIN...`](#zesty-pluginsinspect-plugin)
-  - [`zesty plugins:install PLUGIN...`](#zesty-pluginsinstall-plugin)
-  - [`zesty plugins:link PLUGIN`](#zesty-pluginslink-plugin)
-  - [`zesty plugins:uninstall PLUGIN...`](#zesty-pluginsuninstall-plugin)
-  - [`zesty plugins update`](#zesty-plugins-update)
+* [`zesty hello PERSON`](#zesty-hello-person)
+* [`zesty hello world`](#zesty-hello-world)
+* [`zesty help [COMMAND]`](#zesty-help-command)
+* [`zesty plugins`](#zesty-plugins)
+* [`zesty plugins:inspect PLUGIN...`](#zesty-pluginsinspect-plugin)
+* [`zesty plugins:install PLUGIN...`](#zesty-pluginsinstall-plugin)
+* [`zesty plugins:link PLUGIN`](#zesty-pluginslink-plugin)
+* [`zesty plugins:uninstall PLUGIN...`](#zesty-pluginsuninstall-plugin)
+* [`zesty plugins update`](#zesty-plugins-update)
 
 ## `zesty hello PERSON`
 
