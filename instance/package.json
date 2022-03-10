@@ -1,32 +1,16 @@
 {
-  "name": "@zesty-io/cli",
+  "name": "oclif-hello-world",
+  "description": "oclif example Hello World CLI",
   "version": "0.0.0",
-  "description": "CLI for interacting with Zesty.io services",
-  "author": "Zesty.io",
-  "contributors": [
-    "Stuart Runyan<stuart@zesty.io>"
-  ],
+  "author": "Salesforce",
   "bin": {
-    "zesty": "./bin/run"
+    "oex": "./bin/run"
   },
-  "homepage": "https://github.com/zesty-io/cli",
-  "license": "ISC",
-  "main": "dist/index.js",
-  "repository": "zesty-io/cli",
-  "files": [
-    "/bin",
-    "/dist",
-    "/npm-shrinkwrap.json",
-    "/oclif.manifest.json"
-  ],
+  "bugs": "https://github.com/oclif/hello-world/issues",
   "dependencies": {
     "@oclif/core": "^1",
     "@oclif/plugin-help": "^5",
-    "@oclif/plugin-plugins": "^2.0.1",
-    "chalk": "^5.0.1",
-    "cli-ux": "^6.0.9",
-    "listr": "^0.14.3",
-    "listr-input": "^0.2.1"
+    "@oclif/plugin-plugins": "^2.0.1"
   },
   "devDependencies": {
     "@oclif/test": "^2",
@@ -45,9 +29,24 @@
     "tslib": "^2.3.1",
     "typescript": "^4.4.3"
   },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "files": [
+    "/bin",
+    "/dist",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json"
+  ],
+  "homepage": "https://github.com/oclif/hello-world",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
   "oclif": {
-    "bin": "zesty",
-    "dirname": "zesty",
+    "bin": "oex",
+    "dirname": "oex",
     "commands": "./dist/commands",
     "plugins": [
       "@oclif/plugin-help",
@@ -60,6 +59,7 @@
       }
     }
   },
+  "repository": "oclif/hello-world",
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",
     "lint": "eslint . --ext .ts --config .eslintrc",
@@ -69,12 +69,5 @@
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif readme && git add README.md"
   },
-  "engines": {
-    "node": ">=12.0.0"
-  },
-  "bugs": "https://github.com/zesty-io/cli/issues",
-  "keywords": [
-    "oclif"
-  ],
   "types": "dist/index.d.ts"
 }

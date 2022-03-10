@@ -1,4 +1,4 @@
-import { Command, flags } from '@oclif/command'
+import {Command, Flags} from '@oclif/core'
 import cli from 'cli-ux'
 import chalk from 'chalk'
 

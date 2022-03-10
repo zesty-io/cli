@@ -1,7 +1,7 @@
-CLI
+oclif-hello-world
 =================
 
-CLI for interacting with Zesty.io services
+oclif example Hello World CLI
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/oclif-hello-world.svg)](https://npmjs.org/package/oclif-hello-world)
@@ -16,39 +16,36 @@ CLI for interacting with Zesty.io services
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g @zesty-io/cli
-$ zesty COMMAND
+$ npm install -g oclif-hello-world
+$ oex COMMAND
 running command...
-$ zesty (--version)
-@zesty-io/cli/0.0.0 linux-x64 node-v16.13.1
-$ zesty --help [COMMAND]
+$ oex (--version)
+oclif-hello-world/0.0.0 darwin-x64 node-v16.13.1
+$ oex --help [COMMAND]
 USAGE
-  $ zesty COMMAND
+  $ oex COMMAND
 ...
 ```
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-- [CLI](#cli)
-- [Usage](#usage)
-- [Commands](#commands)
-  - [`zesty hello PERSON`](#zesty-hello-person)
-  - [`zesty hello world`](#zesty-hello-world)
-  - [`zesty help [COMMAND]`](#zesty-help-command)
-  - [`zesty plugins`](#zesty-plugins)
-  - [`zesty plugins:inspect PLUGIN...`](#zesty-pluginsinspect-plugin)
-  - [`zesty plugins:install PLUGIN...`](#zesty-pluginsinstall-plugin)
-  - [`zesty plugins:link PLUGIN`](#zesty-pluginslink-plugin)
-  - [`zesty plugins:uninstall PLUGIN...`](#zesty-pluginsuninstall-plugin)
-  - [`zesty plugins update`](#zesty-plugins-update)
+* [`oex hello PERSON`](#oex-hello-person)
+* [`oex hello world`](#oex-hello-world)
+* [`oex help [COMMAND]`](#oex-help-command)
+* [`oex plugins`](#oex-plugins)
+* [`oex plugins:inspect PLUGIN...`](#oex-pluginsinspect-plugin)
+* [`oex plugins:install PLUGIN...`](#oex-pluginsinstall-plugin)
+* [`oex plugins:link PLUGIN`](#oex-pluginslink-plugin)
+* [`oex plugins:uninstall PLUGIN...`](#oex-pluginsuninstall-plugin)
+* [`oex plugins update`](#oex-plugins-update)
 
-## `zesty hello PERSON`
+## `oex hello PERSON`
 
 Say hello
 
 ```
 USAGE
-  $ zesty hello [PERSON] -f <value>
+  $ oex hello [PERSON] -f <value>
 
 ARGUMENTS
   PERSON  Person to say hello to
@@ -64,15 +61,15 @@ EXAMPLES
   hello friend from oclif! (./src/commands/hello/index.ts)
 ```
 
-_See code: [dist/commands/hello/index.ts](https://github.com/zesty-io/cli/blob/v0.0.0/dist/commands/hello/index.ts)_
+_See code: [dist/commands/hello/index.ts](https://github.com/oclif/hello-world/blob/v0.0.0/dist/commands/hello/index.ts)_
 
-## `zesty hello world`
+## `oex hello world`
 
 Say hello world
 
 ```
 USAGE
-  $ zesty hello world
+  $ oex hello world
 
 DESCRIPTION
   Say hello world
@@ -82,13 +79,13 @@ EXAMPLES
   hello world! (./src/commands/hello/world.ts)
 ```
 
-## `zesty help [COMMAND]`
+## `oex help [COMMAND]`
 
-Display help for zesty.
+Display help for oex.
 
 ```
 USAGE
-  $ zesty help [COMMAND] [-n]
+  $ oex help [COMMAND] [-n]
 
 ARGUMENTS
   COMMAND  Command to show help for.
@@ -97,18 +94,18 @@ FLAGS
   -n, --nested-commands  Include all nested commands in the output.
 
 DESCRIPTION
-  Display help for zesty.
+  Display help for oex.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.12/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.10/src/commands/help.ts)_
 
-## `zesty plugins`
+## `oex plugins`
 
 List installed plugins.
 
 ```
 USAGE
-  $ zesty plugins [--core]
+  $ oex plugins [--core]
 
 FLAGS
   --core  Show core plugins.
@@ -117,18 +114,18 @@ DESCRIPTION
   List installed plugins.
 
 EXAMPLES
-  $ zesty plugins
+  $ oex plugins
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.0.11/src/commands/plugins/index.ts)_
 
-## `zesty plugins:inspect PLUGIN...`
+## `oex plugins:inspect PLUGIN...`
 
 Displays installation properties of a plugin.
 
 ```
 USAGE
-  $ zesty plugins:inspect PLUGIN...
+  $ oex plugins:inspect PLUGIN...
 
 ARGUMENTS
   PLUGIN  [default: .] Plugin to inspect.
@@ -141,16 +138,16 @@ DESCRIPTION
   Displays installation properties of a plugin.
 
 EXAMPLES
-  $ zesty plugins:inspect myplugin
+  $ oex plugins:inspect myplugin
 ```
 
-## `zesty plugins:install PLUGIN...`
+## `oex plugins:install PLUGIN...`
 
 Installs a plugin into the CLI.
 
 ```
 USAGE
-  $ zesty plugins:install PLUGIN...
+  $ oex plugins:install PLUGIN...
 
 ARGUMENTS
   PLUGIN  Plugin to install.
@@ -172,23 +169,23 @@ DESCRIPTION
   the CLI without the need to patch and update the whole CLI.
 
 ALIASES
-  $ zesty plugins add
+  $ oex plugins add
 
 EXAMPLES
-  $ zesty plugins:install myplugin 
+  $ oex plugins:install myplugin 
 
-  $ zesty plugins:install https://github.com/someuser/someplugin
+  $ oex plugins:install https://github.com/someuser/someplugin
 
-  $ zesty plugins:install someuser/someplugin
+  $ oex plugins:install someuser/someplugin
 ```
 
-## `zesty plugins:link PLUGIN`
+## `oex plugins:link PLUGIN`
 
 Links a plugin into the CLI for development.
 
 ```
 USAGE
-  $ zesty plugins:link PLUGIN
+  $ oex plugins:link PLUGIN
 
 ARGUMENTS
   PATH  [default: .] path to plugin
@@ -206,16 +203,16 @@ DESCRIPTION
   command will override the user-installed or core plugin implementation. This is useful for development work.
 
 EXAMPLES
-  $ zesty plugins:link myplugin
+  $ oex plugins:link myplugin
 ```
 
-## `zesty plugins:uninstall PLUGIN...`
+## `oex plugins:uninstall PLUGIN...`
 
 Removes a plugin from the CLI.
 
 ```
 USAGE
-  $ zesty plugins:uninstall PLUGIN...
+  $ oex plugins:uninstall PLUGIN...
 
 ARGUMENTS
   PLUGIN  plugin to uninstall
@@ -228,17 +225,17 @@ DESCRIPTION
   Removes a plugin from the CLI.
 
 ALIASES
-  $ zesty plugins unlink
-  $ zesty plugins remove
+  $ oex plugins unlink
+  $ oex plugins remove
 ```
 
-## `zesty plugins update`
+## `oex plugins update`
 
 Update installed plugins.
 
 ```
 USAGE
-  $ zesty plugins update [-h] [-v]
+  $ oex plugins update [-h] [-v]
 
 FLAGS
   -h, --help     Show CLI help.
