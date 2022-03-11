@@ -1,81 +1,79 @@
-# cli
+CLI
+=================
 
 CLI for interacting with Zesty.io services
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/cli.svg)](https://npmjs.org/package/cli)
-[![Downloads/week](https://img.shields.io/npm/dw/cli.svg)](https://npmjs.org/package/cli)
-[![License](https://img.shields.io/npm/l/cli.svg)](https://github.com/[object Object]/blob/master/package.json)
+[![Version](https://img.shields.io/npm/v/oclif-hello-world.svg)](https://npmjs.org/package/oclif-hello-world)
+[![CircleCI](https://circleci.com/gh/oclif/hello-world/tree/main.svg?style=shield)](https://circleci.com/gh/oclif/hello-world/tree/main)
+[![Downloads/week](https://img.shields.io/npm/dw/oclif-hello-world.svg)](https://npmjs.org/package/oclif-hello-world)
+[![License](https://img.shields.io/npm/l/oclif-hello-world.svg)](https://github.com/oclif/hello-world/blob/main/package.json)
 
 <!-- toc -->
-* [cli](#cli)
 * [Usage](#usage)
 * [Commands](#commands)
-* [Zesty.io CLI](#zestyio-cli)
 <!-- tocstop -->
-
 # Usage
-
 <!-- usage -->
 ```sh-session
 $ npm install -g @zesty-io/cli
 $ zesty COMMAND
 running command...
-$ zesty (-v|--version|version)
-@zesty-io/cli/0.0.1 linux-x64 node-v12.16.0
+$ zesty (--version)
+@zesty-io/cli/0.0.0 linux-x64 node-v16.13.1
 $ zesty --help [COMMAND]
 USAGE
   $ zesty COMMAND
 ...
 ```
 <!-- usagestop -->
-
 # Commands
-
 <!-- commands -->
-* [`zesty auth ZUID EMAIL PASS`](#zesty-auth-zuid-email-pass)
-* [`zesty auth:login [FILE]`](#zesty-authlogin-file)
+* [`zesty auth`](#zesty-auth)
+* [`zesty auth login EMAIL PASS`](#zesty-auth-login-email-pass)
 * [`zesty autocomplete [SHELL]`](#zesty-autocomplete-shell)
 * [`zesty help [COMMAND]`](#zesty-help-command)
 * [`zesty init [ZUID]`](#zesty-init-zuid)
+* [`zesty plugins`](#zesty-plugins)
+* [`zesty plugins:inspect PLUGIN...`](#zesty-pluginsinspect-plugin)
+* [`zesty plugins:install PLUGIN...`](#zesty-pluginsinstall-plugin)
+* [`zesty plugins:link PLUGIN`](#zesty-pluginslink-plugin)
+* [`zesty plugins:uninstall PLUGIN...`](#zesty-pluginsuninstall-plugin)
+* [`zesty plugins update`](#zesty-plugins-update)
 
-## `zesty auth ZUID EMAIL PASS`
-
-Command for authenticating with a Zesty.io instance
+## `zesty auth`
 
 ```
 USAGE
-  $ zesty auth ZUID EMAIL PASS
+  $ zesty auth [-h]
+
+FLAGS
+  -h, --help  Show CLI help.
+```
+
+_See code: [dist/commands/auth/index.ts](https://github.com/zesty-io/cli/blob/v0.0.0/dist/commands/auth/index.ts)_
+
+## `zesty auth login EMAIL PASS`
+
+Command for authenticating with a Zesty.io account
+
+```
+USAGE
+  $ zesty auth login [EMAIL] [PASS] [-h]
 
 ARGUMENTS
-  ZUID   ZUID of the instance you want to connect with
   EMAIL  Your user account email
   PASS   Your user account password
 
-OPTIONS
-  -h, --help  show CLI help
+FLAGS
+  -h, --help  Show CLI help.
 
-EXAMPLE
-  $ zesty auth 8-000-0000 user@example.com strong-password-for-security
+DESCRIPTION
+  Command for authenticating with a Zesty.io account
+
+EXAMPLES
+  $ zesty auth:login user@example.com strong-password-for-security
 ```
-
-_See code: [src/commands/auth.ts](https://github.com/zesty-io/cli/blob/v0.0.1/src/commands/auth.ts)_
-
-## `zesty auth:login [FILE]`
-
-describe the command here
-
-```
-USAGE
-  $ zesty auth:login [FILE]
-
-OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
-```
-
-_See code: [src/commands/auth/login.ts](https://github.com/zesty-io/cli/blob/v0.0.1/src/commands/auth/login.ts)_
 
 ## `zesty autocomplete [SHELL]`
 
@@ -83,39 +81,48 @@ display autocomplete installation instructions
 
 ```
 USAGE
-  $ zesty autocomplete [SHELL]
+  $ zesty autocomplete [SHELL] [-r]
 
 ARGUMENTS
   SHELL  shell type
 
-OPTIONS
+FLAGS
   -r, --refresh-cache  Refresh cache (ignores displaying instructions)
+
+DESCRIPTION
+  display autocomplete installation instructions
 
 EXAMPLES
   $ zesty autocomplete
+
   $ zesty autocomplete bash
+
   $ zesty autocomplete zsh
+
   $ zesty autocomplete --refresh-cache
 ```
 
-_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.1.4/src/commands/autocomplete/index.ts)_
+_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v1.2.0/src/commands/autocomplete/index.ts)_
 
 ## `zesty help [COMMAND]`
 
-display help for zesty
+Display help for zesty.
 
 ```
 USAGE
-  $ zesty help [COMMAND]
+  $ zesty help [COMMAND] [-n]
 
 ARGUMENTS
-  COMMAND  command to show help for
+  COMMAND  Command to show help for.
 
-OPTIONS
-  --all  see all commands in CLI
+FLAGS
+  -n, --nested-commands  Include all nested commands in the output.
+
+DESCRIPTION
+  Display help for zesty.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.1/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.12/src/commands/help.ts)_
 
 ## `zesty init [ZUID]`
 
@@ -123,58 +130,160 @@ describe the command here
 
 ```
 USAGE
-  $ zesty init [ZUID]
+  $ zesty init [ZUID] [-h]
 
-OPTIONS
-  -h, --help  show CLI help
+FLAGS
+  -h, --help  Show CLI help.
+
+DESCRIPTION
+  describe the command here
 ```
 
-_See code: [src/commands/init.ts](https://github.com/zesty-io/cli/blob/v0.0.1/src/commands/init.ts)_
+_See code: [dist/commands/init.ts](https://github.com/zesty-io/cli/blob/v0.0.0/dist/commands/init.ts)_
+
+## `zesty plugins`
+
+List installed plugins.
+
+```
+USAGE
+  $ zesty plugins [--core]
+
+FLAGS
+  --core  Show core plugins.
+
+DESCRIPTION
+  List installed plugins.
+
+EXAMPLES
+  $ zesty plugins
+```
+
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.1.0/src/commands/plugins/index.ts)_
+
+## `zesty plugins:inspect PLUGIN...`
+
+Displays installation properties of a plugin.
+
+```
+USAGE
+  $ zesty plugins:inspect PLUGIN...
+
+ARGUMENTS
+  PLUGIN  [default: .] Plugin to inspect.
+
+FLAGS
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Displays installation properties of a plugin.
+
+EXAMPLES
+  $ zesty plugins:inspect myplugin
+```
+
+## `zesty plugins:install PLUGIN...`
+
+Installs a plugin into the CLI.
+
+```
+USAGE
+  $ zesty plugins:install PLUGIN...
+
+ARGUMENTS
+  PLUGIN  Plugin to install.
+
+FLAGS
+  -f, --force    Run yarn install with force flag.
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Installs a plugin into the CLI.
+
+  Can be installed from npm or a git url.
+
+  Installation of a user-installed plugin will override a core plugin.
+
+  e.g. If you have a core plugin that has a 'hello' command, installing a user-installed plugin with a 'hello' command
+  will override the core plugin implementation. This is useful if a user needs to update core plugin functionality in
+  the CLI without the need to patch and update the whole CLI.
+
+ALIASES
+  $ zesty plugins add
+
+EXAMPLES
+  $ zesty plugins:install myplugin 
+
+  $ zesty plugins:install https://github.com/someuser/someplugin
+
+  $ zesty plugins:install someuser/someplugin
+```
+
+## `zesty plugins:link PLUGIN`
+
+Links a plugin into the CLI for development.
+
+```
+USAGE
+  $ zesty plugins:link PLUGIN
+
+ARGUMENTS
+  PATH  [default: .] path to plugin
+
+FLAGS
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Links a plugin into the CLI for development.
+
+  Installation of a linked plugin will override a user-installed or core plugin.
+
+  e.g. If you have a user-installed or core plugin that has a 'hello' command, installing a linked plugin with a 'hello'
+  command will override the user-installed or core plugin implementation. This is useful for development work.
+
+EXAMPLES
+  $ zesty plugins:link myplugin
+```
+
+## `zesty plugins:uninstall PLUGIN...`
+
+Removes a plugin from the CLI.
+
+```
+USAGE
+  $ zesty plugins:uninstall PLUGIN...
+
+ARGUMENTS
+  PLUGIN  plugin to uninstall
+
+FLAGS
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Removes a plugin from the CLI.
+
+ALIASES
+  $ zesty plugins unlink
+  $ zesty plugins remove
+```
+
+## `zesty plugins update`
+
+Update installed plugins.
+
+```
+USAGE
+  $ zesty plugins update [-h] [-v]
+
+FLAGS
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Update installed plugins.
+```
 <!-- commandsstop -->
-
-# Zesty.io CLI
-
-CLI for interacting with Zesty.io services
-
-## Specfication
-
-The goal of the CLi is to empower developers with tooling and to power tooling like IDE extensions to call the cli.
-
-Node is the ideal base, as its expected that our developers will have Node and NPM installed
-
-IDE/code editor extensions like Atom or VScode would ideally call to the command line rather than having the same logic built into each extension. This same pattern would also empower CI flows.
-
-## List of Commands
-
-Please contributes command ideas here:
-
-`zesty init`
-Asks for instance zuid, Creates zesty.json in that folder, pulls down file structure
-
-`zesty auth`
-Prompts user name, password, 2fa flow
-
-`zesty get instances`
-lists all instances name, status, preview and live domains, and zuid
-
-`zesty pull`
-Checks for zesty.json, pulls any new files. Updates Zesty.json. Lists our any collisions
-
-`zesty pull -o`
-Overwrites all files, updates zesty.josn.
-
-`zesty push`
-Checks for zesty.json Saves all files to zesty.io instance.
-
-`zesty push --filename=xyz`
-Saves single file to zesty.io instance.
-
-`zesty publish --filename=xyz`
-Saves and Publishes single file from local to zesty.io instance.
-
-## Misc
-
-- [ ] Evaluate tools for building CLI
-  - [ ] https://oclif.io/
-  - [ ] https://www.npmjs.com/package/inquirer
-  - [x] https://github.com/spf13/cobra (this requires go installed)

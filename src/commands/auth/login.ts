@@ -1,27 +1,22 @@
-import { Command, flags } from '@oclif/command'
 import cli from 'cli-ux'
-import chalk from 'chalk'
-
-// import SDK from "@zesty-io/sdk"
-const SDK = require("@zesty-io/sdk")
+import { Command, Flags, CliUx } from '@oclif/core'
+import * as chalk from 'chalk'
+import * as SDK from "@zesty-io/sdk"
+import { mkdir, writeFile } from 'fs'
+import { resolve } from 'path'
 
 export default class Auth extends Command {
-  static description = 'Command for authenticating with a Zesty.io instance'
+  static description = 'Command for authenticating with a Zesty.io account'
 
   static examples = [
-    `$ zesty auth 8-000-0000 user@example.com strong-password-for-security`,
+    `$ zesty auth:login user@example.com strong-password-for-security`,
   ]
 
   static flags = {
-    help: flags.help({ char: 'h' }),
+    help: Flags.help({ char: 'h' }),
   }
 
   static args = [
-    {
-      name: 'zuid',
-      required: true,
-      description: "ZUID of the instance you want to connect with"
-    },
     {
       name: 'email',
       required: true,
@@ -34,13 +29,9 @@ export default class Auth extends Command {
     }
   ]
 
-  async run() {
-    const { args } = this.parse(Auth)
+  async run(): Promise<void> {
+    const { args } = await this.parse(Auth)
 
-    if (!args.zuid) {
-      this.warn(`Missing required zuid argument. Which is the ZUID for the instance you want to connect to.`);
-      return
-    }
     if (!args.email) {
       this.warn(`Missing required email argument. Which is the email for the account you want to connect with.`);
       return
@@ -51,31 +42,32 @@ export default class Auth extends Command {
     }
 
     try {
-      cli.action.start('Authenticating with instance')
+      CliUx.ux.action.start('Authenticating with Zesty')
 
       // Get authenticated session
       const auth = new SDK.Auth();
       const session = await auth.login(args.email, args.pass);
+
       if (session.token) {
 
-        // Instantiate sdk instance with instance ZUID and authenticated session token
-        const sdk = new SDK(args.zuid, session.token);
+        // Make config dir
+        mkdir(resolve(this.config.configDir), { recursive: true } as any, (err) => {
+          if (err) {
+            this.log(err?.message)
+          }
 
-        // Verify token
-        const res = await sdk.auth.verifyToken(session.token);
-
-        if (res.code === 200) {
-          this.log(`Authenticated: ${chalk.green(session.token)}`)
-        } else {
-          this.log(chalk.red(`Failed to authenticate. ${res.message}`))
-        }
+          // Generate config file
+          writeFile(resolve(this.config.configDir, "config.json"), `{"USER_TOKEN: "${session.token}"}`, (err) => {
+            this.log(err?.message)
+            this.log(`Authenticated: ${chalk.green(session.token)}`)
+          });
+        })
 
       } else {
-        this.warn(chalk.yellow(session.message))
+        this.log(chalk.red(`Failed to authenticate. ${session.message}`))
       }
 
-
-      cli.action.stop()
+      CliUx.ux.action.stop()
     } catch (err) {
       console.error(err);
     }
