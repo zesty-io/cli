@@ -29,9 +29,11 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`zesty hello PERSON`](#zesty-hello-person)
-* [`zesty hello world`](#zesty-hello-world)
+* [`zesty auth`](#zesty-auth)
+* [`zesty auth login EMAIL PASS`](#zesty-auth-login-email-pass)
+* [`zesty autocomplete [SHELL]`](#zesty-autocomplete-shell)
 * [`zesty help [COMMAND]`](#zesty-help-command)
+* [`zesty init [ZUID]`](#zesty-init-zuid)
 * [`zesty plugins`](#zesty-plugins)
 * [`zesty plugins:inspect PLUGIN...`](#zesty-pluginsinspect-plugin)
 * [`zesty plugins:install PLUGIN...`](#zesty-pluginsinstall-plugin)
@@ -39,45 +41,68 @@ USAGE
 * [`zesty plugins:uninstall PLUGIN...`](#zesty-pluginsuninstall-plugin)
 * [`zesty plugins update`](#zesty-plugins-update)
 
-## `zesty hello PERSON`
-
-Say hello
+## `zesty auth`
 
 ```
 USAGE
-  $ zesty hello [PERSON] -f <value>
-
-ARGUMENTS
-  PERSON  Person to say hello to
+  $ zesty auth [-h]
 
 FLAGS
-  -f, --from=<value>  (required) Whom is saying hello
-
-DESCRIPTION
-  Say hello
-
-EXAMPLES
-  $ oex hello friend --from oclif
-  hello friend from oclif! (./src/commands/hello/index.ts)
+  -h, --help  Show CLI help.
 ```
 
-_See code: [dist/commands/hello/index.ts](https://github.com/zesty-io/cli/blob/v0.0.0/dist/commands/hello/index.ts)_
+_See code: [dist/commands/auth/index.ts](https://github.com/zesty-io/cli/blob/v0.0.0/dist/commands/auth/index.ts)_
 
-## `zesty hello world`
+## `zesty auth login EMAIL PASS`
 
-Say hello world
+Command for authenticating with a Zesty.io account
 
 ```
 USAGE
-  $ zesty hello world
+  $ zesty auth login [EMAIL] [PASS] [-h]
+
+ARGUMENTS
+  EMAIL  Your user account email
+  PASS   Your user account password
+
+FLAGS
+  -h, --help  Show CLI help.
 
 DESCRIPTION
-  Say hello world
+  Command for authenticating with a Zesty.io account
 
 EXAMPLES
-  $ oex hello world
-  hello world! (./src/commands/hello/world.ts)
+  $ zesty auth:login user@example.com strong-password-for-security
 ```
+
+## `zesty autocomplete [SHELL]`
+
+display autocomplete installation instructions
+
+```
+USAGE
+  $ zesty autocomplete [SHELL] [-r]
+
+ARGUMENTS
+  SHELL  shell type
+
+FLAGS
+  -r, --refresh-cache  Refresh cache (ignores displaying instructions)
+
+DESCRIPTION
+  display autocomplete installation instructions
+
+EXAMPLES
+  $ zesty autocomplete
+
+  $ zesty autocomplete bash
+
+  $ zesty autocomplete zsh
+
+  $ zesty autocomplete --refresh-cache
+```
+
+_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v1.2.0/src/commands/autocomplete/index.ts)_
 
 ## `zesty help [COMMAND]`
 
@@ -99,6 +124,23 @@ DESCRIPTION
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.12/src/commands/help.ts)_
 
+## `zesty init [ZUID]`
+
+describe the command here
+
+```
+USAGE
+  $ zesty init [ZUID] [-h]
+
+FLAGS
+  -h, --help  Show CLI help.
+
+DESCRIPTION
+  describe the command here
+```
+
+_See code: [dist/commands/init.ts](https://github.com/zesty-io/cli/blob/v0.0.0/dist/commands/init.ts)_
+
 ## `zesty plugins`
 
 List installed plugins.
@@ -117,7 +159,7 @@ EXAMPLES
   $ zesty plugins
 ```
 
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.0.11/src/commands/plugins/index.ts)_
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.1.0/src/commands/plugins/index.ts)_
 
 ## `zesty plugins:inspect PLUGIN...`
 

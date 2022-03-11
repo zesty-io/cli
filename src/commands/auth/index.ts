@@ -1,9 +1,4 @@
-import {Command, Flags} from '@oclif/core'
-import cli from 'cli-ux'
-import chalk from 'chalk'
-
-// import SDK from "@zesty-io/sdk"
-const SDK = require("@zesty-io/sdk")
+import { Command, Flags } from '@oclif/core'
 
 export default class Auth extends Command {
 
@@ -12,6 +7,6 @@ export default class Auth extends Command {
   }
 
   async run(): Promise<void> {
-    this.log('You need to authenticate with zesty auth:login INSTANCE-ZUID EMAIL PASSWORD')
+    this.log('Use the command; zesty auth:login EMAIL PASSWORD')
   }
 }
