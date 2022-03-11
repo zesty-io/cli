@@ -34,6 +34,7 @@ USAGE
 * [`zesty autocomplete [SHELL]`](#zesty-autocomplete-shell)
 * [`zesty help [COMMAND]`](#zesty-help-command)
 * [`zesty init [ZUID]`](#zesty-init-zuid)
+* [`zesty instance create [NAME]`](#zesty-instance-create-name)
 * [`zesty plugins`](#zesty-plugins)
 * [`zesty plugins:inspect PLUGIN...`](#zesty-pluginsinspect-plugin)
 * [`zesty plugins:install PLUGIN...`](#zesty-pluginsinstall-plugin)
@@ -140,6 +141,24 @@ DESCRIPTION
 ```
 
 _See code: [dist/commands/init.ts](https://github.com/zesty-io/cli/blob/v0.0.0/dist/commands/init.ts)_
+
+## `zesty instance create [NAME]`
+
+Creates a new instance on Zesty.io
+
+```
+USAGE
+  $ zesty instance create [NAME] [-h]
+
+ARGUMENTS
+  NAME  name to use for instance
+
+FLAGS
+  -h, --help  Show CLI help.
+
+DESCRIPTION
+  Creates a new instance on Zesty.io
+```
 
 ## `zesty plugins`
 
