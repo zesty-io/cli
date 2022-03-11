@@ -5,7 +5,7 @@ import * as SDK from "@zesty-io/sdk"
 import { mkdir, writeFile } from 'fs'
 import { resolve } from 'path'
 
-export default class Auth extends Command {
+export default class Login extends Command {
   static description = 'Command for authenticating with a Zesty.io account'
 
   static examples = [
@@ -30,7 +30,9 @@ export default class Auth extends Command {
   ]
 
   async run(): Promise<void> {
-    const { args } = await this.parse(Auth)
+    const { args } = await this.parse(Login)
+
+    this.log(args.email, args.pass)
 
     if (!args.email) {
       this.warn(`Missing required email argument. Which is the email for the account you want to connect with.`);
