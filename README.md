@@ -31,6 +31,7 @@ USAGE
 <!-- commands -->
 * [`zesty auth`](#zesty-auth)
 * [`zesty auth login EMAIL PASS`](#zesty-auth-login-email-pass)
+* [`zesty auth signup EMAIL PASS`](#zesty-auth-signup-email-pass)
 * [`zesty autocomplete [SHELL]`](#zesty-autocomplete-shell)
 * [`zesty help [COMMAND]`](#zesty-help-command)
 * [`zesty init [ZUID]`](#zesty-init-zuid)
@@ -73,6 +74,28 @@ DESCRIPTION
 
 EXAMPLES
   $ zesty auth:login user@example.com strong-password-for-security
+```
+
+## `zesty auth signup EMAIL PASS`
+
+Command for creating a Zesty.io account
+
+```
+USAGE
+  $ zesty auth signup [EMAIL] [PASS] [-h]
+
+ARGUMENTS
+  EMAIL  Your user account email
+  PASS   Your user account password
+
+FLAGS
+  -h, --help  Show CLI help.
+
+DESCRIPTION
+  Command for creating a Zesty.io account
+
+EXAMPLES
+  $ zesty auth:signup user@example.com strong-password-for-security
 ```
 
 ## `zesty autocomplete [SHELL]`
