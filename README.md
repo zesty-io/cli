@@ -30,7 +30,7 @@ USAGE
 # Commands
 <!-- commands -->
 * [`zesty auth`](#zesty-auth)
-* [`zesty auth login EMAIL PASS`](#zesty-auth-login-email-pass)
+* [`zesty auth login [EMAIL] [PASS]`](#zesty-auth-login-email-pass)
 * [`zesty auth signup EMAIL PASS`](#zesty-auth-signup-email-pass)
 * [`zesty autocomplete [SHELL]`](#zesty-autocomplete-shell)
 * [`zesty help [COMMAND]`](#zesty-help-command)
@@ -55,7 +55,7 @@ FLAGS
 
 _See code: [dist/commands/auth/index.ts](https://github.com/zesty-io/cli/blob/v0.0.0/dist/commands/auth/index.ts)_
 
-## `zesty auth login EMAIL PASS`
+## `zesty auth login [EMAIL] [PASS]`
 
 Command for authenticating with a Zesty.io account
 

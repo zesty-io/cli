@@ -1,4 +1,3 @@
-import cli from 'cli-ux'
 import { Command, Flags, CliUx } from '@oclif/core'
 import * as chalk from 'chalk'
 import * as SDK from "@zesty-io/sdk"
@@ -19,36 +18,33 @@ export default class Login extends Command {
   static args = [
     {
       name: 'email',
-      required: true,
       description: "Your user account email"
     },
     {
       name: 'pass',
-      required: true,
       description: "Your user account password"
     }
   ]
 
   async run(): Promise<void> {
     const { args } = await this.parse(Login)
+    let { email, pass } = args
 
-    this.log(args.email, args.pass)
+    if (!email) {
+      email = await CliUx.ux.prompt(`What is your Zesty account email? ${chalk.italic("e.g. hello@example.com")}`)
+    }
+    if (!pass) {
+      pass = await CliUx.ux.prompt(`What is your Zesty account pasword?`)
+    }
 
-    if (!args.email) {
-      this.warn(`Missing required email argument. Which is the email for the account you want to connect with.`);
-      return
-    }
-    if (!args.pass) {
-      this.warn(`Missing required pass argument. Which is the password for the account you want to connect with.`);
-      return
-    }
+    this.log(email, pass)
 
     try {
       CliUx.ux.action.start('Authenticating with Zesty')
 
       // Get authenticated session
       const auth = new SDK.Auth();
-      const session = await auth.login(args.email, args.pass);
+      const session = await auth.login(email, pass);
 
       if (session.token) {
 
@@ -59,7 +55,7 @@ export default class Login extends Command {
           }
 
           // Generate config file
-          writeFile(resolve(this.config.configDir, "config.json"), `{"USER_TOKEN: "${session.token}"}`, (err) => {
+          writeFile(resolve(this.config.configDir, "config.json"), JSON.stringify({ user_token: session.token }), "utf8", (err) => {
             this.log(err?.message)
             this.log(`Authenticated: ${chalk.green(session.token)}`)
           });
@@ -70,6 +66,8 @@ export default class Login extends Command {
       }
 
       CliUx.ux.action.stop()
+
+      return session.token
     } catch (err) {
       console.error(err);
     }

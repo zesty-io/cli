@@ -1,6 +1,8 @@
 import { Command, Flags, CliUx } from '@oclif/core'
 import * as chalk from 'chalk'
 import * as SDK from '@zesty-io/sdk'
+import * as execa from 'execa'
+import { LoadUserToken } from '../../load-token'
 
 export default class InstanceCreate extends Command {
   static description = 'Creates a new instance on Zesty.io'
@@ -27,11 +29,20 @@ export default class InstanceCreate extends Command {
     try {
       CliUx.ux.action.start(`Creating instance ${name}`)
 
-      // // Get authenticated session
+      // Get authenticated session
+      let token = await LoadUserToken(this.config.configDir)
+      if (!token) {
+        // const { stdout } = await execa('zesty auth:login')
+        // this.log(stdout)
+
+        this.warn('You must login with; zesty auth:login')
+        return
+      }
+
+      this.log(token)
 
       // // Create instance
       // SDK.accounts
-
 
       CliUx.ux.action.stop()
     } catch (err) {
