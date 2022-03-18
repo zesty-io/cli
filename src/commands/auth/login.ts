@@ -37,17 +37,16 @@ export default class Login extends Command {
       pass = await CliUx.ux.prompt(`What is your Zesty account pasword?`)
     }
 
-    this.log(email, pass)
-
     try {
       CliUx.ux.action.start('Authenticating with Zesty')
 
       // Get authenticated session
-      const auth = new SDK.Auth();
+      const auth = new SDK.Auth({
+        authURL: "https://auth.api.zesty.io",
+      });
       const session = await auth.login(email, pass);
 
       if (session.token) {
-
         // Make config dir
         mkdir(resolve(this.config.configDir), { recursive: true } as any, (err) => {
           if (err) {
@@ -56,13 +55,15 @@ export default class Login extends Command {
 
           // Generate config file
           writeFile(resolve(this.config.configDir, "config.json"), JSON.stringify({ user_token: session.token }), "utf8", (err) => {
-            this.log(err?.message)
-            this.log(`Authenticated: ${chalk.green(session.token)}`)
+            if (err) {
+              this.error(err?.message)
+            }
+            // this.log(`Authenticated: ${chalk.green(session.token)}`)
           });
         })
 
       } else {
-        this.log(chalk.red(`Failed to authenticate. ${session.message}`))
+        this.warn(chalk.red(`Failed to authenticate. ${session.message}`))
       }
 
       CliUx.ux.action.stop()

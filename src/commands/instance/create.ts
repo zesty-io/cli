@@ -1,11 +1,9 @@
-import { Command, Flags, CliUx } from '@oclif/core'
+import Command from '../authenticated-command'
+import { Flags, CliUx } from '@oclif/core'
 import * as chalk from 'chalk'
-import * as SDK from '@zesty-io/sdk'
-import * as execa from 'execa'
-import { LoadUserToken } from '../../load-token'
 
-export default class InstanceCreate extends Command {
-  static description = 'Creates a new instance on Zesty.io'
+export default class CreateInstance extends Command {
+  static description = 'Create a new instance'
 
   static flags = {
     help: Flags.help({ char: 'h' })
@@ -14,12 +12,12 @@ export default class InstanceCreate extends Command {
   static args = [
     {
       name: 'name',
-      description: "name to use for instance"
+      description: "name for your instance"
     }
   ]
 
   async run() {
-    const { args } = await this.parse(InstanceCreate)
+    const { args } = await this.parse(CreateInstance)
     let { name } = args
 
     if (!name) {
@@ -27,26 +25,22 @@ export default class InstanceCreate extends Command {
     }
 
     try {
-      CliUx.ux.action.start(`Creating instance ${name}`)
+      CliUx.ux.action.start(`Creating instance`)
 
-      // Get authenticated session
-      let token = await LoadUserToken(this.config.configDir)
-      if (!token) {
-        // const { stdout } = await execa('zesty auth:login')
-        // this.log(stdout)
+      const instance = await this.sdk.account.createInstance({ name })
 
-        this.warn('You must login with; zesty auth:login')
-        return
+      if (instance.statusCode === 201) {
+        this.sdk.setInstance(instance.data.ZUID)
+        this.log(`Created instance: ${name}`)
+      } else {
+        this.warn(`Failed to create instance.`)
       }
 
-      this.log(token)
-
-      // // Create instance
-      // SDK.accounts
-
       CliUx.ux.action.stop()
-    } catch (err) {
-      console.error(err);
+
+      return instance
+    } catch (err: any) {
+      this.error(err.message);
     }
   }
 }

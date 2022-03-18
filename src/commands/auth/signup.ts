@@ -8,7 +8,7 @@ export default class Signup extends Command {
   static description = 'Command for creating a Zesty.io account'
 
   static examples = [
-    `$ zesty auth:signup user@example.com strong-password-for-security`,
+    `$ zesty auth:signup jane+doe@example.com strong-password-for-security Jane Doe`,
   ]
 
   static flags = {
@@ -25,27 +25,26 @@ export default class Signup extends Command {
       name: 'pass',
       required: true,
       description: "Your user account password"
+    },
+    {
+      name: 'firstName',
+      required: true,
+      description: "Your first name"
+    },
+    {
+      name: 'lastName',
+      required: true,
+      description: "Your last name"
     }
   ]
 
   async run() {
     const { args } = await this.parse(Signup)
 
-    if (!args.email) {
-      this.warn(`Missing required email argument. Which is the email for the account you want to connect with.`);
-      return
-    }
-    if (!args.pass) {
-      this.warn(`Missing required pass argument. Which is the password for the account you want to connect with.`);
-      return
-    }
-
     try {
       CliUx.ux.action.start('Creating your account')
 
-      const parts = args.email.split('@')
-
-      await fetch(`https://accounts.api.zesty.io/v1/users`, {
+      const res = await fetch(`https://accounts.api.zesty.io/v1/users`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json"
@@ -53,21 +52,25 @@ export default class Signup extends Command {
         body: JSON.stringify({
           email: args.email,
           password: args.pass,
-          firstName: parts[0],
-          lastName: parts[1],
+          firstName: args.firstName,
+          lastName: args.lastName,
         })
       })
         .then(res => res.json())
         .then(json => {
           if (json.error) {
             this.log(chalk.red(json.error))
+            return json
           } else {
-            Login.run([args.email, args.pass])
+            return Login.run([args.email, args.pass])
           }
         })
         .catch(err => this.error(err))
 
       CliUx.ux.action.stop()
+
+      return res
+
     } catch (err) {
       console.error(err);
     }

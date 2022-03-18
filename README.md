@@ -31,11 +31,13 @@ USAGE
 <!-- commands -->
 * [`zesty auth`](#zesty-auth)
 * [`zesty auth login [EMAIL] [PASS]`](#zesty-auth-login-email-pass)
-* [`zesty auth signup EMAIL PASS`](#zesty-auth-signup-email-pass)
+* [`zesty auth signup EMAIL PASS FIRSTNAME LASTNAME`](#zesty-auth-signup-email-pass-firstname-lastname)
+* [`zesty authenticated-command`](#zesty-authenticated-command)
 * [`zesty autocomplete [SHELL]`](#zesty-autocomplete-shell)
 * [`zesty help [COMMAND]`](#zesty-help-command)
-* [`zesty init [ZUID]`](#zesty-init-zuid)
+* [`zesty init`](#zesty-init)
 * [`zesty instance create [NAME]`](#zesty-instance-create-name)
+* [`zesty instance list`](#zesty-instance-list)
 * [`zesty plugins`](#zesty-plugins)
 * [`zesty plugins:inspect PLUGIN...`](#zesty-pluginsinspect-plugin)
 * [`zesty plugins:install PLUGIN...`](#zesty-pluginsinstall-plugin)
@@ -77,17 +79,19 @@ EXAMPLES
   $ zesty auth:login user@example.com strong-password-for-security
 ```
 
-## `zesty auth signup EMAIL PASS`
+## `zesty auth signup EMAIL PASS FIRSTNAME LASTNAME`
 
 Command for creating a Zesty.io account
 
 ```
 USAGE
-  $ zesty auth signup [EMAIL] [PASS] [-h]
+  $ zesty auth signup [EMAIL] [PASS] [FIRSTNAME] [LASTNAME] [-h]
 
 ARGUMENTS
-  EMAIL  Your user account email
-  PASS   Your user account password
+  EMAIL      Your user account email
+  PASS       Your user account password
+  FIRSTNAME  Your first name
+  LASTNAME   Your last name
 
 FLAGS
   -h, --help  Show CLI help.
@@ -96,8 +100,17 @@ DESCRIPTION
   Command for creating a Zesty.io account
 
 EXAMPLES
-  $ zesty auth:signup user@example.com strong-password-for-security
+  $ zesty auth:signup jane+doe@example.com strong-password-for-security Jane Doe
 ```
+
+## `zesty authenticated-command`
+
+```
+USAGE
+  $ zesty authenticated-command
+```
+
+_See code: [dist/commands/authenticated-command.ts](https://github.com/zesty-io/cli/blob/v0.0.0/dist/commands/authenticated-command.ts)_
 
 ## `zesty autocomplete [SHELL]`
 
@@ -148,13 +161,13 @@ DESCRIPTION
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.12/src/commands/help.ts)_
 
-## `zesty init [ZUID]`
+## `zesty init`
 
 describe the command here
 
 ```
 USAGE
-  $ zesty init [ZUID] [-h]
+  $ zesty init [-h]
 
 FLAGS
   -h, --help  Show CLI help.
@@ -167,20 +180,35 @@ _See code: [dist/commands/init.ts](https://github.com/zesty-io/cli/blob/v0.0.0/d
 
 ## `zesty instance create [NAME]`
 
-Creates a new instance on Zesty.io
+Create a new instance
 
 ```
 USAGE
   $ zesty instance create [NAME] [-h]
 
 ARGUMENTS
-  NAME  name to use for instance
+  NAME  name for your instance
 
 FLAGS
   -h, --help  Show CLI help.
 
 DESCRIPTION
-  Creates a new instance on Zesty.io
+  Create a new instance
+```
+
+## `zesty instance list`
+
+List your instances
+
+```
+USAGE
+  $ zesty instance list [-h]
+
+FLAGS
+  -h, --help  Show CLI help.
+
+DESCRIPTION
+  List your instances
 ```
 
 ## `zesty plugins`
