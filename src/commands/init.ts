@@ -4,7 +4,7 @@ import * as input from 'listr-input'
 import * as Listr from 'listr'
 import * as chalk from 'chalk'
 import * as notifier from 'node-notifier'
-import { mkdir, writeFile } from 'fs/promises'
+import { mkdir, stat, writeFile } from 'fs/promises'
 import { resolve } from 'path'
 
 import Signup from './auth/signup'
@@ -37,6 +37,22 @@ export default class Init extends Command {
 
   async run() {
     const { args } = await this.parse(Init);
+
+
+    const zestyConfigDir = resolve(process.cwd(), '.zesty')
+    const zestyConfigFile = resolve(zestyConfigDir, "config.json")
+
+    try {
+      await stat(zestyConfigFile)
+      console.log(`${chalk.yellow('Notice:')} .zesty/config.json already exists`)
+      console.log(chalk('If you want to reinitialize an instance you must delete the .zesty/config.json file'))
+      this.exit()
+    } catch (error: any) {
+      if (error.code !== 'ENOENT') {
+        throw error;
+      }
+    }
+
 
     const { confirm } = await inquirer.prompt({
       type: "confirm",
@@ -156,11 +172,9 @@ export default class Init extends Command {
         this.log(chalk(`Creating .zesty config directory`))
 
         // Make config dir
-        const zestyConfigDir = resolve(process.cwd(), '.zesty')
         await mkdir(zestyConfigDir, { recursive: true } as any)
 
-        // Generate config file
-        const zestyConfigFile = resolve(zestyConfigDir, "config.json")
+        // Write config file
         const configData = { [instance.ZUID]: instance }
         await writeFile(zestyConfigFile, JSON.stringify(configData), "utf8");
       } catch (error: any) {
