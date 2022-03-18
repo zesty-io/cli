@@ -32,10 +32,10 @@ USAGE
 * [`zesty auth`](#zesty-auth)
 * [`zesty auth login [EMAIL] [PASS]`](#zesty-auth-login-email-pass)
 * [`zesty auth signup EMAIL PASS FIRSTNAME LASTNAME`](#zesty-auth-signup-email-pass-firstname-lastname)
-* [`zesty authenticated-command`](#zesty-authenticated-command)
 * [`zesty autocomplete [SHELL]`](#zesty-autocomplete-shell)
 * [`zesty help [COMMAND]`](#zesty-help-command)
 * [`zesty init`](#zesty-init)
+* [`zesty instance`](#zesty-instance)
 * [`zesty instance create [NAME]`](#zesty-instance-create-name)
 * [`zesty instance list`](#zesty-instance-list)
 * [`zesty plugins`](#zesty-plugins)
@@ -103,15 +103,6 @@ EXAMPLES
   $ zesty auth:signup jane+doe@example.com strong-password-for-security Jane Doe
 ```
 
-## `zesty authenticated-command`
-
-```
-USAGE
-  $ zesty authenticated-command
-```
-
-_See code: [dist/commands/authenticated-command.ts](https://github.com/zesty-io/cli/blob/v0.0.0/dist/commands/authenticated-command.ts)_
-
 ## `zesty autocomplete [SHELL]`
 
 display autocomplete installation instructions
@@ -177,6 +168,18 @@ DESCRIPTION
 ```
 
 _See code: [dist/commands/init.ts](https://github.com/zesty-io/cli/blob/v0.0.0/dist/commands/init.ts)_
+
+## `zesty instance`
+
+```
+USAGE
+  $ zesty instance [-h]
+
+FLAGS
+  -h, --help  Show CLI help.
+```
+
+_See code: [dist/commands/instance/index.ts](https://github.com/zesty-io/cli/blob/v0.0.0/dist/commands/instance/index.ts)_
 
 ## `zesty instance create [NAME]`
 

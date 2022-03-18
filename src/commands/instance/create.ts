@@ -1,4 +1,4 @@
-import Command from '../authenticated-command'
+import Command from '../../authenticated-command'
 import { Flags, CliUx } from '@oclif/core'
 import * as chalk from 'chalk'
 
@@ -27,6 +27,7 @@ export default class CreateInstance extends Command {
     try {
       CliUx.ux.action.start(`Creating instance`)
 
+      // TODO use the blueprint: 14-64329e0-555666
       const instance = await this.sdk.account.createInstance({ name })
 
       if (instance.statusCode === 201) {

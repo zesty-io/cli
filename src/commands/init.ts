@@ -10,7 +10,7 @@ import { resolve } from 'path'
 import Signup from './auth/signup'
 import Login from './auth/login'
 import CreateInstance from './instance/create'
-import { GetUserToken, InitSDK } from './authenticated-command'
+import { GetUserToken, InitSDK } from '../authenticated-command'
 
 export default class Init extends Command {
   // token = ''
@@ -110,7 +110,7 @@ export default class Init extends Command {
 
       if (instances?.data?.length) {
         if (instances?.data?.length > 1) {
-          return inquirer.prompt([{
+          await inquirer.prompt([{
             type: 'list',
             name: 'zuid',
             message: 'Which instance would you like to use?',

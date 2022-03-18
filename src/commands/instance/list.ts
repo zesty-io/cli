@@ -1,5 +1,5 @@
 import { Flags, CliUx } from '@oclif/core'
-import Command from '../authenticated-command'
+import Command from '../../authenticated-command'
 
 export default class ListInstances extends Command {
     static description = 'List your instances'
