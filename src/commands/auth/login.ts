@@ -3,6 +3,7 @@ import * as chalk from 'chalk'
 import * as SDK from "@zesty-io/sdk"
 import { mkdir, writeFile } from 'fs'
 import { resolve } from 'path'
+import * as inquirer from 'inquirer'
 
 export default class Login extends Command {
   static description = 'Command for authenticating with a Zesty.io account'
@@ -31,10 +32,22 @@ export default class Login extends Command {
     let { email, pass } = args
 
     if (!email) {
-      email = await CliUx.ux.prompt(`What is your Zesty account email? ${chalk.italic("e.g. hello@example.com")}`)
+      const answer = await inquirer.prompt({
+        type: 'input',
+        name: 'email',
+        message: `Email: (${chalk.italic("e.g. hello@example.com")})`,
+        validate: (value: { length: number; }) => value.length > 0,
+      })
+      email = answer.email
     }
     if (!pass) {
-      pass = await CliUx.ux.prompt(`What is your Zesty account pasword?`)
+      const answer = await inquirer.prompt({
+        type: 'password',
+        name: 'pass',
+        message: "Password:",
+        validate: (value: { length: number; }) => value.length > 0,
+      })
+      pass = answer.pass
     }
 
     try {
@@ -44,9 +57,12 @@ export default class Login extends Command {
       const auth = new SDK.Auth({
         authURL: "https://auth.api.zesty.io",
       });
-      const session = await auth.login(email, pass);
+      const session = await auth.login(email, pass);      
 
       if (session.token) {
+
+        // TODO fetch user to get email & zuid
+
         // Make config dir
         mkdir(resolve(this.config.configDir), { recursive: true } as any, (err) => {
           if (err) {
@@ -54,11 +70,15 @@ export default class Login extends Command {
           }
 
           // Generate config file
-          writeFile(resolve(this.config.configDir, "config.json"), JSON.stringify({ user_token: session.token }), "utf8", (err) => {
+          writeFile(resolve(this.config.configDir, "config.json"), JSON.stringify({
+            // email: 
+            // user_zuid: 
+            user_token: session.token
+          }), "utf8", (err) => {
             if (err) {
               this.error(err?.message)
             }
-            // this.log(`Authenticated: ${chalk.green(session.token)}`)
+            // this.log(`Authenticated: ${chalk.green(email)}`)
           });
         })
 
