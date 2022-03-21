@@ -1,6 +1,7 @@
 import { Command, Flags, CliUx } from '@oclif/core'
 import fetch from 'node-fetch';
 import * as chalk from 'chalk'
+import * as inquirer from 'inquirer'
 
 import Login from './login'
 
@@ -40,6 +41,44 @@ export default class Signup extends Command {
 
   async run() {
     const { args } = await this.parse(Signup)
+    let { email, pass, firstName, lastName } = args
+
+    if (!email) {
+      const answer = await inquirer.prompt({
+        type: 'input',
+        name: 'email',
+        message: `Email (${chalk.italic("If you do not have an account we can create one")}):`,
+        validate: (value: { length: number; }) => value.length > 0,
+      })
+      email = answer.email
+    }
+    if (!pass) {
+      const answer = await inquirer.prompt({
+        type: 'password',
+        name: 'pass',
+        message: "Password:",
+        validate: (value: { length: number; }) => value.length > 0,
+      })
+      pass = answer.pass
+    }
+    if (!firstName) {
+      const answer = await inquirer.prompt({
+        type: 'input',
+        name: 'firstName',
+        message: "First Name:",
+        validate: (value: { length: number; }) => value.length > 0,
+      })
+      firstName = answer.firstName
+    }
+    if (!lastName) {
+      const answer = await inquirer.prompt({
+        type: 'input',
+        name: 'lastName',
+        message: "Last Name:",
+        validate: (value: { length: number; }) => value.length > 0,
+      })
+      lastName = answer.lastName
+    }
 
     try {
       CliUx.ux.action.start('Creating your account')
