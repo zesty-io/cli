@@ -19,22 +19,18 @@ export default class Signup extends Command {
   static args = [
     {
       name: 'email',
-      required: true,
       description: "Your user account email"
     },
     {
       name: 'pass',
-      required: true,
       description: "Your user account password"
     },
     {
       name: 'firstName',
-      required: true,
       description: "Your first name"
     },
     {
       name: 'lastName',
-      required: true,
       description: "Your last name"
     }
   ]

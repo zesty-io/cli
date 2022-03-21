@@ -30,8 +30,9 @@ USAGE
 # Commands
 <!-- commands -->
 * [`zesty auth`](#zesty-auth)
+* [`zesty auth get-user-token`](#zesty-auth-get-user-token)
 * [`zesty auth login [EMAIL] [PASS]`](#zesty-auth-login-email-pass)
-* [`zesty auth signup EMAIL PASS FIRSTNAME LASTNAME`](#zesty-auth-signup-email-pass-firstname-lastname)
+* [`zesty auth signup [EMAIL] [PASS] [FIRSTNAME] [LASTNAME]`](#zesty-auth-signup-email-pass-firstname-lastname)
 * [`zesty autocomplete [SHELL]`](#zesty-autocomplete-shell)
 * [`zesty help [COMMAND]`](#zesty-help-command)
 * [`zesty init`](#zesty-init)
@@ -57,6 +58,18 @@ FLAGS
 
 _See code: [dist/commands/auth/index.ts](https://github.com/zesty-io/cli/blob/v0.0.0/dist/commands/auth/index.ts)_
 
+## `zesty auth get-user-token`
+
+Show current user session token CLI is configured to use
+
+```
+USAGE
+  $ zesty auth get-user-token
+
+DESCRIPTION
+  Show current user session token CLI is configured to use
+```
+
 ## `zesty auth login [EMAIL] [PASS]`
 
 Command for authenticating with a Zesty.io account
@@ -79,7 +92,7 @@ EXAMPLES
   $ zesty auth:login user@example.com strong-password-for-security
 ```
 
-## `zesty auth signup EMAIL PASS FIRSTNAME LASTNAME`
+## `zesty auth signup [EMAIL] [PASS] [FIRSTNAME] [LASTNAME]`
 
 Command for creating a Zesty.io account
 
