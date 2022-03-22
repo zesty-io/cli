@@ -77,8 +77,8 @@
     "prepack": "yarn build && oclif manifest && oclif readme",
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif readme && git add README.md",
-    "release": "npm run prepack && npm publish",
-    "release:alpha": "npm run prepack && npm publish --tag alpha"
+    "release": "npm publish",
+    "release:alpha": "npm publish --tag alpha"
   },
   "engines": {
     "node": ">=12.0.0"
