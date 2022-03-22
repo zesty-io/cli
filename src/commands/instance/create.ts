@@ -35,7 +35,7 @@ export default class CreateInstance extends Command {
         this.log(`Created instance: ${name}`)
 
         // TODO: this needs to get moved into the SDK
-        // set blueprint to skeleton
+        // set blueprint to bootstrap
         this.log(`Setting instance blueprint`)
         await fetch(`https://accounts.api.zesty.io/v1/instances/${instance.data.ZUID}/blueprints`, {
           method: "PUT",
@@ -43,7 +43,7 @@ export default class CreateInstance extends Command {
             'Authorization': `Bearer ${this.sdk.token}`,
             'Content-Type': "application/json"
           },
-          body: JSON.stringify({ "zuid": "14-64329e0-555666" })
+          body: JSON.stringify({ "zuid": "14-64329e0-555660" })
         })
 
       } else {

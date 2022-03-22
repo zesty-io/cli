@@ -1,6 +1,6 @@
 {
   "name": "@zesty-io/cli",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "CLI for interacting with Zesty.io services",
   "author": "Zesty.io",
   "contributors": [
@@ -63,8 +63,6 @@
     "commands": "./dist/commands",
     "plugins": [
       "@oclif/plugin-help",
-      "@oclif/plugin-plugins",
-      "@oclif/plugin-autocomplete",
       "@oclif/plugin-not-found",
       "@oclif/plugin-warn-if-update-available"
     ],
@@ -78,7 +76,9 @@
     "posttest": "yarn lint",
     "prepack": "yarn build && oclif manifest && oclif readme",
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
-    "version": "oclif readme && git add README.md"
+    "version": "oclif readme && git add README.md",
+    "release": "npm run prepack && npm publish",
+    "release:alpha": "npm run prepack && npm publish --tag alpha"
   },
   "engines": {
     "node": ">=12.0.0"

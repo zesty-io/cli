@@ -11,7 +11,7 @@ import { GetUserToken, InitSDK } from '../authenticated-command'
 
 export default class Init extends Command {
 
-  static description = "describe the command here";
+  static description = "Initialize a project with a Zesty.io instance";
 
   static flags = {
     help: Flags.help({ char: "h" })
