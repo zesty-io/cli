@@ -1,9 +1,9 @@
-import cli from 'cli-ux'
 import { Command, Flags, CliUx } from '@oclif/core'
 import * as chalk from 'chalk'
 import * as SDK from "@zesty-io/sdk"
 import { mkdir, writeFile } from 'fs'
 import { resolve } from 'path'
+import * as inquirer from 'inquirer'
 
 export default class Login extends Command {
   static description = 'Command for authenticating with a Zesty.io account'
@@ -19,38 +19,49 @@ export default class Login extends Command {
   static args = [
     {
       name: 'email',
-      required: true,
       description: "Your user account email"
     },
     {
       name: 'pass',
-      required: true,
       description: "Your user account password"
     }
   ]
 
   async run(): Promise<void> {
     const { args } = await this.parse(Login)
+    let { email, pass } = args
 
-    this.log(args.email, args.pass)
-
-    if (!args.email) {
-      this.warn(`Missing required email argument. Which is the email for the account you want to connect with.`);
-      return
+    if (!email) {
+      const answer = await inquirer.prompt({
+        type: 'input',
+        name: 'email',
+        message: `Email: (${chalk.italic("e.g. hello@example.com")})`,
+        validate: (value: { length: number; }) => value.length > 0,
+      })
+      email = answer.email
     }
-    if (!args.pass) {
-      this.warn(`Missing required pass argument. Which is the password for the account you want to connect with.`);
-      return
+    if (!pass) {
+      const answer = await inquirer.prompt({
+        type: 'password',
+        name: 'pass',
+        message: "Password:",
+        validate: (value: { length: number; }) => value.length > 0,
+      })
+      pass = answer.pass
     }
 
     try {
       CliUx.ux.action.start('Authenticating with Zesty')
 
       // Get authenticated session
-      const auth = new SDK.Auth();
-      const session = await auth.login(args.email, args.pass);
+      const auth = new SDK.Auth({
+        authURL: "https://auth.api.zesty.io",
+      });
+      const session = await auth.login(email, pass);      
 
       if (session.token) {
+
+        // TODO fetch user to get email & zuid
 
         // Make config dir
         mkdir(resolve(this.config.configDir), { recursive: true } as any, (err) => {
@@ -59,17 +70,25 @@ export default class Login extends Command {
           }
 
           // Generate config file
-          writeFile(resolve(this.config.configDir, "config.json"), `{"USER_TOKEN: "${session.token}"}`, (err) => {
-            this.log(err?.message)
-            this.log(`Authenticated: ${chalk.green(session.token)}`)
+          writeFile(resolve(this.config.configDir, "config.json"), JSON.stringify({
+            // email: 
+            // user_zuid: 
+            user_token: session.token
+          }), "utf8", (err) => {
+            if (err) {
+              this.error(err?.message)
+            }
+            // this.log(`Authenticated: ${chalk.green(email)}`)
           });
         })
 
       } else {
-        this.log(chalk.red(`Failed to authenticate. ${session.message}`))
+        this.warn(chalk.red(`Failed to authenticate. ${session.message}`))
       }
 
       CliUx.ux.action.stop()
+
+      return session.token
     } catch (err) {
       console.error(err);
     }

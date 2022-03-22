@@ -1,6 +1,7 @@
 import { Command, Flags, CliUx } from '@oclif/core'
 import fetch from 'node-fetch';
 import * as chalk from 'chalk'
+import * as inquirer from 'inquirer'
 
 import Login from './login'
 
@@ -8,7 +9,7 @@ export default class Signup extends Command {
   static description = 'Command for creating a Zesty.io account'
 
   static examples = [
-    `$ zesty auth:signup user@example.com strong-password-for-security`,
+    `$ zesty auth:signup jane+doe@example.com strong-password-for-security Jane Doe`,
   ]
 
   static flags = {
@@ -18,34 +19,67 @@ export default class Signup extends Command {
   static args = [
     {
       name: 'email',
-      required: true,
       description: "Your user account email"
     },
     {
       name: 'pass',
-      required: true,
       description: "Your user account password"
+    },
+    {
+      name: 'firstName',
+      description: "Your first name"
+    },
+    {
+      name: 'lastName',
+      description: "Your last name"
     }
   ]
 
   async run() {
     const { args } = await this.parse(Signup)
+    let { email, pass, firstName, lastName } = args
 
-    if (!args.email) {
-      this.warn(`Missing required email argument. Which is the email for the account you want to connect with.`);
-      return
+    if (!email) {
+      const answer = await inquirer.prompt({
+        type: 'input',
+        name: 'email',
+        message: `Email (${chalk.italic("If you do not have an account we can create one")}):`,
+        validate: (value: { length: number; }) => value.length > 0,
+      })
+      email = answer.email
     }
-    if (!args.pass) {
-      this.warn(`Missing required pass argument. Which is the password for the account you want to connect with.`);
-      return
+    if (!pass) {
+      const answer = await inquirer.prompt({
+        type: 'password',
+        name: 'pass',
+        message: "Password:",
+        validate: (value: { length: number; }) => value.length > 0,
+      })
+      pass = answer.pass
+    }
+    if (!firstName) {
+      const answer = await inquirer.prompt({
+        type: 'input',
+        name: 'firstName',
+        message: "First Name:",
+        validate: (value: { length: number; }) => value.length > 0,
+      })
+      firstName = answer.firstName
+    }
+    if (!lastName) {
+      const answer = await inquirer.prompt({
+        type: 'input',
+        name: 'lastName',
+        message: "Last Name:",
+        validate: (value: { length: number; }) => value.length > 0,
+      })
+      lastName = answer.lastName
     }
 
     try {
       CliUx.ux.action.start('Creating your account')
 
-      const parts = args.email.split('@')
-
-      await fetch(`https://accounts.api.zesty.io/v1/users`, {
+      const res = await fetch(`https://accounts.api.zesty.io/v1/users`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json"
@@ -53,21 +87,25 @@ export default class Signup extends Command {
         body: JSON.stringify({
           email: args.email,
           password: args.pass,
-          firstName: parts[0],
-          lastName: parts[1],
+          firstName: args.firstName,
+          lastName: args.lastName,
         })
       })
         .then(res => res.json())
         .then(json => {
           if (json.error) {
             this.log(chalk.red(json.error))
+            return json
           } else {
-            Login.run([args.email, args.pass])
+            return Login.run([args.email, args.pass])
           }
         })
         .catch(err => this.error(err))
 
       CliUx.ux.action.stop()
+
+      return res
+
     } catch (err) {
       console.error(err);
     }
