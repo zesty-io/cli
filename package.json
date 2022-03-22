@@ -1,6 +1,6 @@
 {
   "name": "@zesty-io/cli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "CLI for interacting with Zesty.io services",
   "author": "Zesty.io",
   "contributors": [
@@ -26,7 +26,7 @@
     "@oclif/plugin-not-found": "^2.3.1",
     "@oclif/plugin-plugins": "^2.0.1",
     "@oclif/plugin-warn-if-update-available": "^2.0.4",
-    "@zesty-io/sdk": "0.2.1",
+    "@zesty-io/sdk": "^0.3.0",
     "chalk": "^4.1.2",
     "execa": "^5.1.1",
     "inquirer": "^8.2.1",
