@@ -43,7 +43,7 @@ export default class CreateInstance extends Command {
             'Authorization': `Bearer ${this.sdk.token}`,
             'Content-Type': "application/json"
           },
-          body: JSON.stringify({ "zuid": "14-64329e0-555660" })
+          body: JSON.stringify({ "zuid": "14-64329e0-555645" })
         })
 
       } else {
