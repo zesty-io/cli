@@ -31,6 +31,19 @@ export function InitSDK(token: string) {
     })
 }
 
+export async function GetInstanceBin(token: string, instanceId: string) {
+    const res = await fetch(`https://media-manager.api.zesty.io/site/${instanceId}/bins`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        }
+      })
+        .then(res => res.json())
+        .then(json => json.data)
+
+      return res
+}
+
 export default abstract class extends Command {
     sdk: any
 

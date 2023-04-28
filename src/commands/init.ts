@@ -7,7 +7,7 @@ import { resolve } from 'path'
 import Signup from './auth/signup'
 import Login from './auth/login'
 import CreateInstance from './instance/create'
-import { GetUserToken, InitSDK } from '../authenticated-command'
+import { GetUserToken, InitSDK, GetInstanceBin } from '../authenticated-command'
 
 export default class Init extends Command {
 
@@ -166,6 +166,12 @@ export default class Init extends Command {
     // write repo config
     try {
       this.log(chalk(`Creating .zesty config directory`))
+
+      const bin = await GetInstanceBin(token, instance.ZUID)
+
+      if (bin) {
+        instance["mediaDomain"] = bin.storage_base_url
+      }
 
       // Make config dir
       await mkdir(zestyConfigDir, { recursive: true } as any)
