@@ -7,7 +7,7 @@ import { resolve } from 'path'
 import Signup from './auth/signup'
 import Login from './auth/login'
 import CreateInstance from './instance/create'
-import { GetUserToken, InitSDK, GetInstanceBin } from '../authenticated-command'
+import { GetUserToken, InitSDK } from '../authenticated-command'
 
 export default class Init extends Command {
 
@@ -167,10 +167,17 @@ export default class Init extends Command {
     try {
       this.log(chalk(`Creating .zesty config directory`))
 
-      const bin = await GetInstanceBin(token, instance.ZUID)
+      sdk.setInstance(instance.ZUID)
+      const bins = await sdk.media.getBins()
 
-      if (bin) {
-        instance["mediaDomain"] = bin.storage_base_url
+      if (bins?.data?.length > 0) {
+        let mediaDomains: string[] = []
+
+        bins.data.forEach((bin: any) => {
+          mediaDomains.push(bin.storage_base_url)
+        });
+
+        instance["mediaDomain"] = mediaDomains
       }
 
       // Make config dir
