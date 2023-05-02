@@ -174,7 +174,7 @@ export default class Init extends Command {
         let mediaDomains: string[] = []
 
         bins.data.forEach((bin: any) => {
-          mediaDomains.push(bin.storage_base_url)
+          mediaDomains.push(bin.cdn_base_url)
         });
 
         instance["mediaDomain"] = mediaDomains
