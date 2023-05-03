@@ -167,19 +167,6 @@ export default class Init extends Command {
     try {
       this.log(chalk(`Creating .zesty config directory`))
 
-      sdk.setInstance(instance.ZUID)
-      const bins = await sdk.media.getBins()
-
-      if (bins?.data?.length > 0) {
-        let mediaDomains: string[] = []
-
-        bins.data.forEach((bin: any) => {
-          mediaDomains.push(bin.cdn_base_url)
-        });
-
-        instance["mediaDomain"] = mediaDomains
-      }
-
       // Make config dir
       await mkdir(zestyConfigDir, { recursive: true } as any)
 

@@ -30,7 +30,7 @@ export function InitSDK(token: string) {
         // mediaAPIURL: "https://svc.zesty.io",
     })
 }
-  
+
 export default abstract class extends Command {
     sdk: any
 
