@@ -6,7 +6,7 @@ import { mkdir, writeFile } from 'fs/promises'
 import { existsSync } from 'fs'
 import { resolve } from 'path'
 
-export default class ListMediaBins extends Command {
+export default class GenerateMediaBins extends Command {
     static description = 'Command for generating the bins data of an instance as JSON in .zesty directory'
   
     static flags = {
@@ -21,7 +21,7 @@ export default class ListMediaBins extends Command {
     ]
   
     async run(): Promise<void> {
-      const { args } = await this.parse(ListMediaBins)
+      const { args } = await this.parse(GenerateMediaBins)
       let { instance_zuid } = args
   
       if (!instance_zuid) {
