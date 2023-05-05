@@ -20,7 +20,7 @@ $ npm install -g @zesty-io/cli
 $ zesty COMMAND
 running command...
 $ zesty (--version)
-@zesty-io/cli/0.0.4 linux-x64 node-v16.13.1
+@zesty-io/cli/0.0.4 darwin-x64 node-v16.18.0
 $ zesty --help [COMMAND]
 USAGE
   $ zesty COMMAND
@@ -38,6 +38,9 @@ USAGE
 * [`zesty instance`](#zesty-instance)
 * [`zesty instance create [NAME]`](#zesty-instance-create-name)
 * [`zesty instance list`](#zesty-instance-list)
+* [`zesty media bin`](#zesty-media-bin)
+* [`zesty media bin generate [INSTANCE_ZUID]`](#zesty-media-bin-generate-instance_zuid)
+* [`zesty media bin list [INSTANCE_ZUID]`](#zesty-media-bin-list-instance_zuid)
 
 ## `zesty auth`
 
@@ -189,5 +192,51 @@ FLAGS
 
 DESCRIPTION
   List your instances
+```
+
+## `zesty media bin`
+
+```
+USAGE
+  $ zesty media bin [-h]
+
+FLAGS
+  -h, --help  Show CLI help.
+```
+
+## `zesty media bin generate [INSTANCE_ZUID]`
+
+Command for generating the bins data of an instance as JSON in .zesty directory
+
+```
+USAGE
+  $ zesty media bin generate [INSTANCE_ZUID] [-h]
+
+ARGUMENTS
+  INSTANCE_ZUID  instance_ZUID of your instance
+
+FLAGS
+  -h, --help  Show CLI help.
+
+DESCRIPTION
+  Command for generating the bins data of an instance as JSON in .zesty directory
+```
+
+## `zesty media bin list [INSTANCE_ZUID]`
+
+Command for listing media bins of an instance
+
+```
+USAGE
+  $ zesty media bin list [INSTANCE_ZUID] [-h]
+
+ARGUMENTS
+  INSTANCE_ZUID  instance_ZUID of your instance
+
+FLAGS
+  -h, --help  Show CLI help.
+
+DESCRIPTION
+  Command for listing media bins of an instance
 ```
 <!-- commandsstop -->
