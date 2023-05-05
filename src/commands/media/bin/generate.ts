@@ -25,11 +25,6 @@ export default class ListMediaBins extends Command {
       let { instance_zuid } = args
   
       if (!instance_zuid) {
-        //  const { instance_ZUID } = await inquirer.prompt({
-        //     type: 'input',
-        //     name: 'instance_zuid',
-        //     message: `What is the instance_zuid of the media bins you want to generate? ${chalk.italic("e.g. 8-abcd-1234")}`
-        //   })
         instance_zuid = await CliUx.ux.prompt(`What is the instance_zuid of the media bins you want to generate? ${chalk.italic("e.g. 8-abcd-1234")}`)
       }
   
