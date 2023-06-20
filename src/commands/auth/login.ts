@@ -5,6 +5,8 @@ import { mkdir, writeFile } from 'fs'
 import { resolve } from 'path'
 import * as inquirer from 'inquirer'
 import * as express from 'express'
+import * as cookieParser from 'cookie-parser'
+
 const open = require('open')
 
 export default class Login extends Command {
@@ -14,8 +16,11 @@ export default class Login extends Command {
     help: Flags.help({ char: 'h' }),
   }
 
+  sessionToken: string | undefined
+  server: any | null = null;
+
   async run(): Promise<void> {
-    let sessionToken: any
+    const authURL = "https://auth.api.dev.zesty.io"
 
     const answer = await inquirer.prompt([
       {
@@ -28,65 +33,63 @@ export default class Login extends Command {
     const service = answer.service
 
     try {
-      switch(service) { 
-        case "Zesty": { 
-          const emailPrompt = await inquirer.prompt({
-            type: 'input',
-            name: 'email',
-            message: `Email: (${chalk.italic("e.g. hello@example.com")})`,
-            validate: (value: { length: number; }) => value.length > 0,
-          })
-          const email = emailPrompt.email
-       
-          const passPrompt = await inquirer.prompt({
-            type: 'password',
-            name: 'pass',
-            message: "Password:",
-            validate: (value: { length: number; }) => value.length > 0,
-          })
-          const pass = passPrompt.pass
+      if (service === "Zesty") { 
+        const emailPrompt = await inquirer.prompt({
+          type: 'input',
+          name: 'email',
+          message: `Email: (${chalk.italic("e.g. hello@example.com")})`,
+          validate: (value: { length: number; }) => value.length > 0,
+        })
+        const email = emailPrompt.email
+      
+        const passPrompt = await inquirer.prompt({
+          type: 'password',
+          name: 'pass',
+          message: "Password:",
+          validate: (value: { length: number; }) => value.length > 0,
+        })
+        const pass = passPrompt.pass
 
-          CliUx.ux.action.start(`Authenticating with ${service}`)
-          
-          const auth = new SDK.Auth({
-            authURL: "https://auth.api.zesty.io",
-          });
-          const session = await auth.login(email, pass);
+        CliUx.ux.action.start(`Authenticating with ${service}`)
+        
+        const auth = new SDK.Auth({ authURL: authURL });
+        const session = await auth.login(email, pass);
 
-          if (session.token) {
-            sessionToken = session.token
-            this.WriteTokenToConfigFile(sessionToken)
-          } else {
-            this.warn(chalk.red(`Failed to authenticate. ${session.message}`))
-          }
+        if (session.token) {
+          this.sessionToken = session.token
+          this.WriteTokenToConfigFile()
+        } else {
+          this.warn(chalk.red(`Failed to authenticate. ${session.message}`))
+        }
 
-          CliUx.ux.action.stop()
-          break; 
-        } 
-        case "Okta": { 
-          break; 
-        } 
-        default: {
+        CliUx.ux.action.stop()
+      } else {
           const idp = service === "Microsoft" ? "azure" : service.toLowerCase();
-          const loginURL = `https://auth.api.dev.zesty.io/${idp}/login?redirect_uri=http://localhost:8085`;
+          const loginURL = `${authURL}/${idp}/login?redirect_uri=http://localhost:8085`;
 
-          this.StartLocalServer(loginURL)
-          CliUx.ux.action.start(`Authenticating with ${service}`)
-          open(loginURL)
+          await new Promise<void>((resolve, reject) =>{
+            this.StartLocalServer(service)
+            CliUx.ux.action.start(`Authenticating with ${service}`)
+            open(loginURL)
 
-          // CliUx.ux.action.stop()
-
-          break; 
-        } 
+            const intervalId = setInterval(() => {
+              if (this.sessionToken !== undefined) {
+                clearInterval(intervalId);
+                
+                // this.server.close();
+                resolve();
+              }
+            }, 1000);
+          });
+          
+          CliUx.ux.action.stop()
       }
-
-      // return sessionToken
     } catch (err) {
       console.error(err);
     }
   }
 
-  WriteTokenToConfigFile(sessionToken: string) {
+  WriteTokenToConfigFile() {
     // Make config dir
     mkdir(resolve(this.config.configDir), { recursive: true } as any, (err) => {
       if (err) {
@@ -95,7 +98,7 @@ export default class Login extends Command {
 
       // Generate config file
       writeFile(resolve(this.config.configDir, "config.json"), JSON.stringify({
-        user_token: sessionToken
+        user_token: this.sessionToken
       }), "utf8", (err) => {
         if (err) {
           this.error(err?.message)
@@ -104,21 +107,28 @@ export default class Login extends Command {
     })
   }
 
-  StartLocalServer(loginURL: string) {
+  StartLocalServer(service: string) {
     const app = express();
 
-    app.use((req: express.Request, res: express.Response, next: Function) => {
-      req.setTimeout(0);
-      next();
+    app.use(cookieParser());
+
+    app.get('/finished', (req: express.Request, res: express.Response, next: express.NextFunction) => {
+      console.log(req.cookies["APP_SID"]);
+      console.log(req.headers);
+      
+      if (req.query.status === "200") {
+        // this.sessionToken = "sessionToken"
+        // TO DO
+      } else {
+        this.log(chalk.red(`Failed to authenticate. ${req.query.error_message}`))
+      }
+
+      // res.redirect("https://zesty.io")
+      res.send(req.cookies);
     });
 
-    app.get('/', (req: express.Request, res: express.Response, next: Function) => {
-      // this.log(JSON.stringify(req.headers.cookie));
-      res.send(req.headers.cookie);
-    });
-
-    app.listen(8085, () => {
-      console.log(`Your browser has been opened to visit: ${loginURL}. Please complete login.`);
+    this.server = app.listen(8085, () => {
+      this.log(`Your browser has been opened to login to Zesty using ${service}. Please complete the login to continue.`);
     });
   }
 }
