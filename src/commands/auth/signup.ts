@@ -9,7 +9,7 @@ export default class Signup extends Command {
   static description = 'Command for creating a Zesty.io account'
 
   static examples = [
-    `$ zesty auth:signup jane+doe@example.com strong-password-for-security Jane Doe`,
+    `$ zesty auth signup jane+doe@example.com strong-password-for-security Jane Doe`,
   ]
 
   static flags = {
@@ -97,7 +97,7 @@ export default class Signup extends Command {
             this.log(chalk.red(json.error))
             return json
           } else {
-            return Login.run([args.email, args.pass])
+            return Login.run(["zesty"])
           }
         })
         .catch(err => this.error(err))

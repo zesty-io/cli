@@ -24,8 +24,8 @@ export async function GetUserToken(path: string) {
 
 export function InitSDK(token: string) {
     return new SDK('', token, {
-        accountsAPIURL: "https://accounts.api.zesty.io/v1",
-        authURL: "https://auth.api.zesty.io",
+        accountsAPIURL: "https://accounts.api.dev.zesty.io/v1",
+        authURL: "https://auth.api.dev.zesty.io",
         // instancesAPIURL: "https://INSTANCE_ZUID.api.zesty.io/v1",
         // mediaAPIURL: "https://svc.zesty.io",
     })
@@ -41,14 +41,17 @@ export default abstract class extends Command {
     async init() {
         try {
             const token = await GetUserToken(this.config.configDir)
+
             const auth = new SDK.Auth({
-                authURL: "https://auth.api.zesty.io",
+                authURL: "https://auth.api.dev.zesty.io",
             })
             const valid = await auth.verifyToken(token)
 
+            this.log(valid)
+
             if (!token || !valid.verified) {
                 // TODO can we trigger login flow from here?
-                throw new Error('You must login with the command: zesty auth:login')
+                throw new Error('You must login with the command: zesty auth login')
             }
 
             this.sdk = InitSDK(token)

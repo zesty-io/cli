@@ -7,6 +7,6 @@ export default class Auth extends Command {
   }
 
   async run(): Promise<void> {
-    this.log('Use the command; zesty auth:login EMAIL PASSWORD')
+    this.log('Use the command; zesty auth login')
   }
 }
