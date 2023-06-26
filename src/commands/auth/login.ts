@@ -84,37 +84,39 @@ export default class Login extends Command {
         }
 
         CliUx.ux.action.stop()
+
+        return this.sessionToken
       } else { // SSO authentication
-          let loginURL = `${authURL}/${service}/login?redirect_uri=http://localhost:8085`
+        let loginURL = `${authURL}/${service}/login?redirect_uri=http://localhost:8085`
 
-          if (service === "okta") {
-            const clientDomainPrompt = await inquirer.prompt({
-              type: 'input',
-              name: 'clientDomain',
-              message: `Client Domain: (${chalk.italic("e.g. https://myorg.okta.com")})`,
-              validate: (value: { length: number; }) => value.length > 0,
-            })
-            loginURL = `${loginURL}&iss=${clientDomainPrompt.clientDomain}`
-          }
-
-          await new Promise<void>((resolve, reject) =>{
-            this.StartLocalServer(service)
-            CliUx.ux.action.start(`Authenticating with ${service}`)
-            open(loginURL)
-
-            const intervalId = setInterval(async () => {
-              if (this.sessionToken !== undefined || this.failedSSOAuthentication) {
-                clearInterval(intervalId)
-                CliUx.ux.action.stop()
-                
-                this.server.close()
-                resolve()
-              }
-            }, 2000)
+        if (service === "okta") {
+          const clientDomainPrompt = await inquirer.prompt({
+            type: 'input',
+            name: 'clientDomain',
+            message: `Client Domain: (${chalk.italic("e.g. https://myorg.okta.com")})`,
+            validate: (value: { length: number; }) => value.length > 0,
           })
-      }
+          loginURL = `${loginURL}&iss=${clientDomainPrompt.clientDomain}`
+        }
 
-      return this.sessionToken
+        await new Promise<void>((resolve, reject) =>{
+          this.StartLocalServer(service)
+          CliUx.ux.action.start(`Authenticating with ${service}`)
+          open(loginURL)
+
+          const intervalId = setInterval(async () => {
+            if (this.sessionToken !== undefined || this.failedSSOAuthentication) {
+              this.server.close()
+              
+              clearInterval(intervalId)
+              resolve()
+            }
+          }, 1000)
+        })
+
+        CliUx.ux.action.stop()
+        return this.sessionToken
+      }
     } catch (err) {
       console.error(err)
     }
@@ -145,6 +147,7 @@ export default class Login extends Command {
       cors({
         credentials: true,
         origin: [
+          /localhost:?\d*$/,
           /zesty\.localdev:?\d*$/,
           /dev.zesty\.io:?\d*$/,
           /stage.zesty\.io:?\d*$/,
@@ -153,28 +156,24 @@ export default class Login extends Command {
       })
     )
 
-    app.use(express.json())
-
     // Successful authentication
-    app.post('/get-session', (req: express.Request, res: express.Response) => {
-      console.log(req.body)
-
-      if (req.body.sessionToken) {
-        this.sessionToken = req.body.sessionToken
+    app.post('/get-session', express.text(), (req: express.Request, res: express.Response) => {
+      if (req.body) {
+        this.sessionToken = req.body
         this.WriteTokenToConfigFile()
         this.log(chalk.green(`Successfully authenticated to Zesty CLI using ${service}`))
 
-        res.status(200)
+        res.end()
       } else {
         this.failedSSOAuthentication = true
         this.log(`Failed to authenticate. Session Token not returned`)
 
-        res.status(403).send(`Failed to authenticate. Session Token not returned`)
+        res.redirect("/finished?status=403&error_message=Failed to authenticate. Session Token not returned")
       }
     })
     
     // Failed authentication
-    app.get('/finished', (req: express.Request, res: express.Response) => {
+    app.get('/finished', express.json(), (req: express.Request, res: express.Response) => {
       const statusCodeString: string | undefined = req.query.status as string
       const statusCode: number = parseInt(statusCodeString, 10)
 
