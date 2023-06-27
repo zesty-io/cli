@@ -173,14 +173,11 @@ export default class Login extends Command {
     })
     
     // Failed authentication
-    app.get('/finished', express.json(), (req: express.Request, res: express.Response) => {
-      const statusCodeString: string | undefined = req.query.status as string
-      const statusCode: number = parseInt(statusCodeString, 10)
-
+    app.get('/finished', (req: express.Request, res: express.Response) => {
       this.failedSSOAuthentication = true
       this.log(chalk.red(`Failed to authenticate. ${req.query.error_message}`))
 
-      res.status(statusCode).send(`Failed to authenticate. ${req.query.error_message}`)
+      res.redirect("https://zesty.io")
     })
 
     this.server = app.listen(8085, () => {
