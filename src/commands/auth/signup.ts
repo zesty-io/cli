@@ -79,7 +79,7 @@ export default class Signup extends Command {
     try {
       CliUx.ux.action.start('Creating your account')
 
-      const res = await fetch(`https://accounts.api.dev.zesty.io/v1/users`, {
+      const res = await fetch(`https://accounts.api.zesty.io/v1/users`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json"

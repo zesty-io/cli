@@ -34,7 +34,7 @@ export default class Login extends Command {
   failedSSOAuthentication: boolean | undefined
 
   async run(): Promise<void> {
-    const authURL = "https://auth.api.dev.zesty.io"
+    const authURL = "https://auth.api.zesty.io"
     const { args } = await this.parse(Login)
     let { service } = args
 

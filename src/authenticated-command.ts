@@ -24,8 +24,8 @@ export async function GetUserToken(path: string) {
 
 export function InitSDK(token: string) {
     return new SDK('', token, {
-        accountsAPIURL: "https://accounts.api.dev.zesty.io/v1",
-        authURL: "https://auth.api.dev.zesty.io",
+        accountsAPIURL: "https://accounts.api.zesty.io/v1",
+        authURL: "https://auth.api.zesty.io",
         // instancesAPIURL: "https://INSTANCE_ZUID.api.zesty.io/v1",
         // mediaAPIURL: "https://svc.zesty.io",
     })
@@ -43,7 +43,7 @@ export default abstract class extends Command {
             const token = await GetUserToken(this.config.configDir)
 
             const auth = new SDK.Auth({
-                authURL: "https://auth.api.dev.zesty.io",
+                authURL: "https://auth.api.zesty.io",
             })
             const valid = await auth.verifyToken(token)
 
