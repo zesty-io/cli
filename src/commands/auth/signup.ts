@@ -103,10 +103,9 @@ export default class Signup extends Command {
         })
         .catch(err => this.error(err))
 
-      
+      CliUx.ux.action.stop()
 
       return res
-
     } catch (err) {
       console.error(err);
     }

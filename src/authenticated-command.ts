@@ -41,7 +41,6 @@ export default abstract class extends Command {
     async init() {
         try {
             const token = await GetUserToken(this.config.configDir)
-
             const auth = new SDK.Auth({
                 authURL: "https://auth.api.zesty.io",
             })
