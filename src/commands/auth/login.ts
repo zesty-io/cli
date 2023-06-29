@@ -13,7 +13,8 @@ export default class Login extends Command {
   static description = 'Command for authenticating with a Zesty.io account using basic and SSO authentication'
 
   static examples = [
-    `$ zesty auth login zesty`,
+    `$ zesty auth:login zesty`,
+    `$ zesty auth:login google`,
   ]
   
   static flags = {

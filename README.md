@@ -20,7 +20,7 @@ $ npm install -g @zesty-io/cli
 $ zesty COMMAND
 running command...
 $ zesty (--version)
-@zesty-io/cli/0.0.4 linux-x64 node-v16.13.1
+@zesty-io/cli/0.0.4 darwin-x64 node-v16.18.0
 $ zesty --help [COMMAND]
 USAGE
   $ zesty COMMAND
@@ -31,9 +31,9 @@ USAGE
 <!-- commands -->
 * [`zesty auth`](#zesty-auth)
 * [`zesty auth get-user-token`](#zesty-auth-get-user-token)
-* [`zesty auth login [EMAIL] [PASS]`](#zesty-auth-login-email-pass)
+* [`zesty auth login [SERVICE]`](#zesty-auth-login-service)
 * [`zesty auth signup [EMAIL] [PASS] [FIRSTNAME] [LASTNAME]`](#zesty-auth-signup-email-pass-firstname-lastname)
-* [`zesty help [COMMAND]`](#zesty-help-command)
+* [`zesty help [COMMANDS]`](#zesty-help-commands)
 * [`zesty init`](#zesty-init)
 * [`zesty instance`](#zesty-instance)
 * [`zesty instance create [NAME]`](#zesty-instance-create-name)
@@ -63,26 +63,28 @@ DESCRIPTION
   Show current user session token CLI is configured to use
 ```
 
-## `zesty auth login [EMAIL] [PASS]`
+## `zesty auth login [SERVICE]`
 
-Command for authenticating with a Zesty.io account
+Command for authenticating with a Zesty.io account using basic and SSO authentication
 
 ```
 USAGE
-  $ zesty auth login [EMAIL] [PASS] [-h]
+  $ zesty auth login [SERVICE] [-h]
 
 ARGUMENTS
-  EMAIL  Your user account email
-  PASS   Your user account password
+  SERVICE  (zesty|microsoft|google|github|okta) The service to be used to login. Accepted values are zesty, microsoft,
+           google, github and okta
 
 FLAGS
   -h, --help  Show CLI help.
 
 DESCRIPTION
-  Command for authenticating with a Zesty.io account
+  Command for authenticating with a Zesty.io account using basic and SSO authentication
 
 EXAMPLES
-  $ zesty auth:login user@example.com strong-password-for-security
+  $ zesty auth:login zesty
+
+  $ zesty auth:login google
 ```
 
 ## `zesty auth signup [EMAIL] [PASS] [FIRSTNAME] [LASTNAME]`
@@ -109,16 +111,16 @@ EXAMPLES
   $ zesty auth:signup jane+doe@example.com strong-password-for-security Jane Doe
 ```
 
-## `zesty help [COMMAND]`
+## `zesty help [COMMANDS]`
 
 Display help for zesty.
 
 ```
 USAGE
-  $ zesty help [COMMAND] [-n]
+  $ zesty help [COMMANDS] [-n]
 
 ARGUMENTS
-  COMMAND  Command to show help for.
+  COMMANDS  Command to show help for.
 
 FLAGS
   -n, --nested-commands  Include all nested commands in the output.
@@ -127,7 +129,7 @@ DESCRIPTION
   Display help for zesty.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.12/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.2.10/src/commands/help.ts)_
 
 ## `zesty init`
 

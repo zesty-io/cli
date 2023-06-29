@@ -9,7 +9,7 @@ export default class Signup extends Command {
   static description = 'Command for creating a Zesty.io account'
 
   static examples = [
-    `$ zesty auth signup jane+doe@example.com strong-password-for-security Jane Doe`,
+    `$ zesty auth:signup jane+doe@example.com strong-password-for-security Jane Doe`,
   ]
 
   static flags = {

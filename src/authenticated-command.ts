@@ -49,7 +49,7 @@ export default abstract class extends Command {
 
             if (!token || !valid.verified) {
                 // TODO can we trigger login flow from here?
-                throw new Error('You must login with the command: zesty auth login')
+                throw new Error('You must login with the command: zesty auth:login')
             }
 
             this.sdk = InitSDK(token)
