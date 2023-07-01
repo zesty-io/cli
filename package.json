@@ -25,7 +25,7 @@
     "@oclif/plugin-help": "^5.1.12",
     "@oclif/plugin-not-found": "^2.3.1",
     "@oclif/plugin-plugins": "^2.0.1",
-    "@oclif/plugin-warn-if-update-available": "^2.0.4",
+    "@oclif/plugin-warn-if-update-available": "^2.0.40",
     "@zesty-io/sdk": "^0.3.0",
     "chalk": "^4.1.2",
     "execa": "^5.1.1",
