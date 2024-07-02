@@ -28,6 +28,7 @@
     "@oclif/plugin-warn-if-update-available": "^2.0.4",
     "@zesty-io/sdk": "^0.3.0",
     "chalk": "^4.1.2",
+    "dotenv": "^16.4.5",
     "execa": "^5.1.1",
     "inquirer": "^8.2.1",
     "listr": "^0.14.3",

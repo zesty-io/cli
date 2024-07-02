@@ -1,4 +1,4 @@
-import Command from '../../authenticated-command'
+import Command, { getAPIURLs } from '../../authenticated-command'
 import { Flags, CliUx } from '@oclif/core'
 import fetch from 'node-fetch'
 import * as chalk from 'chalk'
@@ -19,6 +19,7 @@ export default class CreateInstance extends Command {
 
   async run() {
     const { args } = await this.parse(CreateInstance)
+    const { accountsAPIURL } = getAPIURLs()
     let { name } = args
 
     if (!name) {
@@ -37,7 +38,7 @@ export default class CreateInstance extends Command {
         // TODO: this needs to get moved into the SDK
         // set blueprint to bootstrap
         this.log(`Setting instance blueprint`)
-        await fetch(`https://accounts.api.zesty.io/v1/instances/${instance.data.ZUID}/blueprints`, {
+        await fetch(`${accountsAPIURL}/instances/${instance.data.ZUID}/blueprints`, {
           method: "PUT",
           headers: {
             'Authorization': `Bearer ${this.sdk.token}`,
