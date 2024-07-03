@@ -191,3 +191,14 @@ DESCRIPTION
   List your instances
 ```
 <!-- commandsstop -->
+
+
+## Development
+Create a `.env` file in the root of your project and add your environment variable:
+
+    ```env
+    ENV=local
+    ```
+
+    You can set `ENV` to `local`, `dev`, `stage`, or `prod` based on the environment you are working with.
+

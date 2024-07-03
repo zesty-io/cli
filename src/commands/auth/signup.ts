@@ -2,6 +2,7 @@ import { Command, Flags, CliUx } from '@oclif/core'
 import fetch from 'node-fetch';
 import * as chalk from 'chalk'
 import * as inquirer from 'inquirer'
+import { getAPIURLs } from '../../authenticated-command'
 
 import Login from './login'
 
@@ -37,6 +38,8 @@ export default class Signup extends Command {
 
   async run() {
     const { args } = await this.parse(Signup)
+    const { accountsAPIURL } = getAPIURLs()
+
     let { email, pass, firstName, lastName } = args
 
     if (!email) {
@@ -79,7 +82,7 @@ export default class Signup extends Command {
     try {
       CliUx.ux.action.start('Creating your account')
 
-      const res = await fetch(`https://accounts.api.zesty.io/v1/users`, {
+      const res = await fetch(`${accountsAPIURL}/users`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json"

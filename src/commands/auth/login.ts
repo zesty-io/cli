@@ -4,6 +4,7 @@ import * as SDK from "@zesty-io/sdk"
 import { mkdir, writeFile } from 'fs'
 import { resolve } from 'path'
 import * as inquirer from 'inquirer'
+import { getAPIURLs } from '../../authenticated-command'
 
 export default class Login extends Command {
   static description = 'Command for authenticating with a Zesty.io account'
@@ -29,6 +30,8 @@ export default class Login extends Command {
 
   async run(): Promise<void> {
     const { args } = await this.parse(Login)
+    const { authURL } = getAPIURLs()
+
     let { email, pass } = args
 
     if (!email) {
@@ -55,9 +58,9 @@ export default class Login extends Command {
 
       // Get authenticated session
       const auth = new SDK.Auth({
-        authURL: "https://auth.api.zesty.io",
+        authURL
       });
-      const session = await auth.login(email, pass);      
+      const session = await auth.login(email, pass);
 
       if (session.token) {
 
@@ -71,8 +74,8 @@ export default class Login extends Command {
 
           // Generate config file
           writeFile(resolve(this.config.configDir, "config.json"), JSON.stringify({
-            // email: 
-            // user_zuid: 
+            // email:
+            // user_zuid:
             user_token: session.token
           }), "utf8", (err) => {
             if (err) {
