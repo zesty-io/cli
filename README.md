@@ -20,7 +20,7 @@ $ npm install -g @zesty-io/cli
 $ zesty COMMAND
 running command...
 $ zesty (--version)
-@zesty-io/cli/0.0.4 darwin-x64 node-v16.18.0
+@zesty-io/cli/0.0.4 darwin-x64 node-v20.10.0
 $ zesty --help [COMMAND]
 USAGE
   $ zesty COMMAND
@@ -129,7 +129,7 @@ DESCRIPTION
   Display help for zesty.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.2.10/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.12/src/commands/help.ts)_
 
 ## `zesty init`
 

@@ -20,7 +20,7 @@
     "/oclif.manifest.json"
   ],
   "dependencies": {
-    "@oclif/core": "1.24.3",
+    "@oclif/core": "^1.24.3",
     "@oclif/plugin-autocomplete": "^1.2.0",
     "@oclif/plugin-help": "^5.1.12",
     "@oclif/plugin-not-found": "^2.3.1",
@@ -60,7 +60,7 @@
     "shx": "^0.3.3",
     "ts-node": "^10.2.1",
     "tslib": "^2.3.1",
-    "typescript": "^4.6.2"
+    "typescript": "^4.9.5"
   },
   "oclif": {
     "bin": "zesty",
@@ -86,7 +86,7 @@
     "release:alpha": "npm publish --tag alpha"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=20.10.0"
   },
   "bugs": "https://github.com/zesty-io/cli/issues",
   "keywords": [
