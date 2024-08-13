@@ -85,6 +85,8 @@ EXAMPLES
   $ zesty auth:login zesty
 
   $ zesty auth:login google
+
+  $ zesty auth:login zesty
 ```
 
 ## `zesty auth signup [EMAIL] [PASS] [FIRSTNAME] [LASTNAME]`
@@ -129,7 +131,7 @@ DESCRIPTION
   Display help for zesty.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.12/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.2.20/src/commands/help.ts)_
 
 ## `zesty init`
 

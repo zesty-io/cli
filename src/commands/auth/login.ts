@@ -15,6 +15,7 @@ export default class Login extends Command {
   static examples = [
     `$ zesty auth:login zesty`,
     `$ zesty auth:login google`,
+    `$ zesty auth:login zesty`,
   ]
   
   static flags = {
