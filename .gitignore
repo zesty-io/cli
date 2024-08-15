@@ -8,6 +8,7 @@
 /yarn.lock
 node_modules
 oclif.manifest.json
+tsconfig.tsbuildinfo
 
 // created during testing
 .zesty

@@ -20,7 +20,7 @@ $ npm install -g @zesty-io/cli
 $ zesty COMMAND
 running command...
 $ zesty (--version)
-@zesty-io/cli/0.0.4 linux-x64 node-v16.13.1
+@zesty-io/cli/0.0.4 darwin-x64 node-v20.10.0
 $ zesty --help [COMMAND]
 USAGE
   $ zesty COMMAND
@@ -33,7 +33,7 @@ USAGE
 * [`zesty auth get-user-token`](#zesty-auth-get-user-token)
 * [`zesty auth login [EMAIL] [PASS]`](#zesty-auth-login-email-pass)
 * [`zesty auth signup [EMAIL] [PASS] [FIRSTNAME] [LASTNAME]`](#zesty-auth-signup-email-pass-firstname-lastname)
-* [`zesty help [COMMAND]`](#zesty-help-command)
+* [`zesty help [COMMANDS]`](#zesty-help-commands)
 * [`zesty init`](#zesty-init)
 * [`zesty instance`](#zesty-instance)
 * [`zesty instance create [NAME]`](#zesty-instance-create-name)
@@ -109,16 +109,16 @@ EXAMPLES
   $ zesty auth:signup jane+doe@example.com strong-password-for-security Jane Doe
 ```
 
-## `zesty help [COMMAND]`
+## `zesty help [COMMANDS]`
 
 Display help for zesty.
 
 ```
 USAGE
-  $ zesty help [COMMAND] [-n]
+  $ zesty help [COMMANDS] [-n]
 
 ARGUMENTS
-  COMMAND  Command to show help for.
+  COMMANDS  Command to show help for.
 
 FLAGS
   -n, --nested-commands  Include all nested commands in the output.
@@ -127,7 +127,7 @@ DESCRIPTION
   Display help for zesty.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.12/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.2.20/src/commands/help.ts)_
 
 ## `zesty init`
 
