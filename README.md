@@ -31,7 +31,7 @@ USAGE
 <!-- commands -->
 * [`zesty auth`](#zesty-auth)
 * [`zesty auth get-user-token`](#zesty-auth-get-user-token)
-* [`zesty auth login [EMAIL] [PASS]`](#zesty-auth-login-email-pass)
+* [`zesty auth login [SERVICE]`](#zesty-auth-login-service)
 * [`zesty auth signup [EMAIL] [PASS] [FIRSTNAME] [LASTNAME]`](#zesty-auth-signup-email-pass-firstname-lastname)
 * [`zesty help [COMMANDS]`](#zesty-help-commands)
 * [`zesty init`](#zesty-init)
@@ -63,26 +63,30 @@ DESCRIPTION
   Show current user session token CLI is configured to use
 ```
 
-## `zesty auth login [EMAIL] [PASS]`
+## `zesty auth login [SERVICE]`
 
-Command for authenticating with a Zesty.io account
+Command for authenticating with a Zesty.io account using basic and SSO authentication
 
 ```
 USAGE
-  $ zesty auth login [EMAIL] [PASS] [-h]
+  $ zesty auth login [SERVICE] [-h]
 
 ARGUMENTS
-  EMAIL  Your user account email
-  PASS   Your user account password
+  SERVICE  (zesty|microsoft|google|github|okta) The service to be used to login. Accepted values are zesty, microsoft,
+           google, github and okta
 
 FLAGS
   -h, --help  Show CLI help.
 
 DESCRIPTION
-  Command for authenticating with a Zesty.io account
+  Command for authenticating with a Zesty.io account using basic and SSO authentication
 
 EXAMPLES
-  $ zesty auth:login user@example.com strong-password-for-security
+  $ zesty auth:login zesty
+
+  $ zesty auth:login google
+
+  $ zesty auth:login zesty
 ```
 
 ## `zesty auth signup [EMAIL] [PASS] [FIRSTNAME] [LASTNAME]`

@@ -17,22 +17,7 @@ export default class Init extends Command {
     help: Flags.help({ char: "h" })
   };
 
-  // TODO support running command without prompts
-  // static args = [
-  //   { name: "zuid" },
-  //   {
-  //     name: 'email',
-  //     description: "Your user account email"
-  //   },
-  //   {
-  //     name: 'pass',
-  //     description: "Your user account password"
-  //   },
-  // ]
-
   async run() {
-    const { args } = await this.parse(Init);
-
     const zestyConfigDir = resolve(process.cwd(), '.zesty')
     const zestyConfigFile = resolve(zestyConfigDir, "config.json")
 
@@ -72,38 +57,53 @@ export default class Init extends Command {
 
     if (!authenticated) {
       // login
-      const { email } = await inquirer.prompt({
-        type: 'input',
-        name: 'email',
-        message: `Email (${chalk.italic("If you do not have an account we will create one now")}):`,
-        validate: (value: { length: number; }) => value.length > 0,
-      })
-      const { pass } = await inquirer.prompt({
-        type: 'password',
-        name: 'pass',
-        message: "Password:",
-        validate: (value: { length: number; }) => value.length > 0,
-      })
-      token = await Login.run([email, pass])
+      const { service } = await inquirer.prompt([
+        {
+          type: 'list',
+          name: 'service',
+          message: 'Which service would you like to use?',
+          choices: [
+            { name: "Zesty", value: "zesty" },
+            { name: "Microsoft", value: "azure" },
+            { name: "Google", value: "google" },
+            { name: "Github", value: "github" },
+            { name: "Okta", value: "okta" },
+          ],
+        },
+      ])
+      token = await Login.run([service])
 
       if (!token) {
         const { signup } = await inquirer.prompt({
           type: "confirm",
           name: "signup",
-          message: `Unable to login with provided email. Create account?`
+          message: `Unable to login. Create account?`
         })
 
         if (signup) {
+          const { email } = await inquirer.prompt({
+            type: 'input',
+            name: 'email',
+            message: `Email (${chalk.italic("If you do not have an account we will create one now")}):`,
+            validate: (value: { length: number; }) => value.length > 0,
+          })
+          const { pass } = await inquirer.prompt({
+            type: 'password',
+            name: 'pass',
+            message: "Password:",
+            validate: (value: { length: number; }) => value.length > 0,
+          })
+
           const signup = await Signup.run([email, pass])
           if (signup.error) {
             this.error(signup.error)
           } else {
-            token = await Login.run([email, pass])
+            token = await Login.run([service])
           }
         } else {
           // One more login attempt 
           this.log(chalk('One more login attempt'))
-          token = await Login.run([])
+          token = await Login.run([service])
         }
       }
     }
