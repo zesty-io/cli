@@ -93,11 +93,12 @@ export default class Signup extends Command {
       })
         .then(res => res.json())
         .then(json => {
+          CliUx.ux.action.stop()
           if (json.error) {
             this.log(chalk.red(json.error))
             return json
           } else {
-            return Login.run([args.email, args.pass])
+            return Login.run(["zesty"])
           }
         })
         .catch(err => this.error(err))
@@ -105,7 +106,6 @@ export default class Signup extends Command {
       CliUx.ux.action.stop()
 
       return res
-
     } catch (err) {
       console.error(err);
     }
