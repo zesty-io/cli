@@ -20,7 +20,7 @@ $ npm install -g @zesty-io/cli
 $ zesty COMMAND
 running command...
 $ zesty (--version)
-@zesty-io/cli/0.0.5 linux-x64 node-v20.19.4
+@zesty-io/cli/0.0.6 linux-x64 node-v22.18.0
 $ zesty --help [COMMAND]
 USAGE
   $ zesty COMMAND
