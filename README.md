@@ -20,7 +20,7 @@ $ npm install -g @zesty-io/cli
 $ zesty COMMAND
 running command...
 $ zesty (--version)
-@zesty-io/cli/0.0.4 darwin-x64 node-v20.10.0
+@zesty-io/cli/0.0.5 linux-x64 node-v20.19.4
 $ zesty --help [COMMAND]
 USAGE
   $ zesty COMMAND
@@ -49,7 +49,7 @@ FLAGS
   -h, --help  Show CLI help.
 ```
 
-_See code: [dist/commands/auth/index.ts](https://github.com/zesty-io/cli/blob/v0.0.4/dist/commands/auth/index.ts)_
+_See code: [dist/commands/auth/index.ts](https://github.com/zesty-io/cli/blob/v0.0.5/dist/commands/auth/index.ts)_
 
 ## `zesty auth get-user-token`
 
@@ -144,7 +144,7 @@ DESCRIPTION
   Initialize a project with a Zesty.io instance
 ```
 
-_See code: [dist/commands/init.ts](https://github.com/zesty-io/cli/blob/v0.0.4/dist/commands/init.ts)_
+_See code: [dist/commands/init.ts](https://github.com/zesty-io/cli/blob/v0.0.5/dist/commands/init.ts)_
 
 ## `zesty instance`
 
@@ -156,7 +156,7 @@ FLAGS
   -h, --help  Show CLI help.
 ```
 
-_See code: [dist/commands/instance/index.ts](https://github.com/zesty-io/cli/blob/v0.0.4/dist/commands/instance/index.ts)_
+_See code: [dist/commands/instance/index.ts](https://github.com/zesty-io/cli/blob/v0.0.5/dist/commands/instance/index.ts)_
 
 ## `zesty instance create [NAME]`
 
