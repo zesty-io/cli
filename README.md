@@ -20,7 +20,7 @@ $ npm install -g @zesty-io/cli
 $ zesty COMMAND
 running command...
 $ zesty (--version)
-@zesty-io/cli/0.0.6 darwin-x64 node-v22.16.0
+@zesty-io/cli/0.0.7 linux-x64 node-v22.16.0
 $ zesty --help [COMMAND]
 USAGE
   $ zesty COMMAND
@@ -49,7 +49,7 @@ FLAGS
   -h, --help  Show CLI help.
 ```
 
-_See code: [src/commands/auth/index.ts](https://github.com/zesty-io/cli/blob/v0.0.6/src/commands/auth/index.ts)_
+_See code: [src/commands/auth/index.ts](https://github.com/zesty-io/cli/blob/v0.0.7/src/commands/auth/index.ts)_
 
 ## `zesty auth get-user-token`
 
@@ -63,7 +63,7 @@ DESCRIPTION
   Show current user session token CLI is configured to use
 ```
 
-_See code: [src/commands/auth/get-user-token.ts](https://github.com/zesty-io/cli/blob/v0.0.6/src/commands/auth/get-user-token.ts)_
+_See code: [src/commands/auth/get-user-token.ts](https://github.com/zesty-io/cli/blob/v0.0.7/src/commands/auth/get-user-token.ts)_
 
 ## `zesty auth login [EMAIL] [PASS]`
 
@@ -87,7 +87,7 @@ EXAMPLES
   $ zesty auth:login user@example.com strong-password-for-security
 ```
 
-_See code: [src/commands/auth/login.ts](https://github.com/zesty-io/cli/blob/v0.0.6/src/commands/auth/login.ts)_
+_See code: [src/commands/auth/login.ts](https://github.com/zesty-io/cli/blob/v0.0.7/src/commands/auth/login.ts)_
 
 ## `zesty auth signup [EMAIL] [PASS] [FIRSTNAME] [LASTNAME]`
 
@@ -113,7 +113,7 @@ EXAMPLES
   $ zesty auth:signup jane+doe@example.com strong-password-for-security Jane Doe
 ```
 
-_See code: [src/commands/auth/signup.ts](https://github.com/zesty-io/cli/blob/v0.0.6/src/commands/auth/signup.ts)_
+_See code: [src/commands/auth/signup.ts](https://github.com/zesty-io/cli/blob/v0.0.7/src/commands/auth/signup.ts)_
 
 ## `zesty help [COMMANDS]`
 
@@ -150,7 +150,7 @@ DESCRIPTION
   Initialize a project with a Zesty.io instance
 ```
 
-_See code: [src/commands/init.ts](https://github.com/zesty-io/cli/blob/v0.0.6/src/commands/init.ts)_
+_See code: [src/commands/init.ts](https://github.com/zesty-io/cli/blob/v0.0.7/src/commands/init.ts)_
 
 ## `zesty instance`
 
@@ -162,7 +162,7 @@ FLAGS
   -h, --help  Show CLI help.
 ```
 
-_See code: [src/commands/instance/index.ts](https://github.com/zesty-io/cli/blob/v0.0.6/src/commands/instance/index.ts)_
+_See code: [src/commands/instance/index.ts](https://github.com/zesty-io/cli/blob/v0.0.7/src/commands/instance/index.ts)_
 
 ## `zesty instance create [NAME]`
 
@@ -182,7 +182,7 @@ DESCRIPTION
   Create a new instance
 ```
 
-_See code: [src/commands/instance/create.ts](https://github.com/zesty-io/cli/blob/v0.0.6/src/commands/instance/create.ts)_
+_See code: [src/commands/instance/create.ts](https://github.com/zesty-io/cli/blob/v0.0.7/src/commands/instance/create.ts)_
 
 ## `zesty instance list`
 
@@ -199,5 +199,5 @@ DESCRIPTION
   List your instances
 ```
 
-_See code: [src/commands/instance/list.ts](https://github.com/zesty-io/cli/blob/v0.0.6/src/commands/instance/list.ts)_
+_See code: [src/commands/instance/list.ts](https://github.com/zesty-io/cli/blob/v0.0.7/src/commands/instance/list.ts)_
 <!-- commandsstop -->
