@@ -51,7 +51,7 @@
     "eslint-config-oclif-typescript": "^1.0.2",
     "globby": "11.0.4",
     "mocha": "^11.7.1",
-    "oclif": "^4.22.14",
+    "oclif": "^4.22.16",
     "shx": "^0.3.3",
     "ts-node": "^10.2.1",
     "tslib": "^2.3.1",
