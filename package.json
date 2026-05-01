@@ -34,7 +34,7 @@
     "listr-input": "^0.2.1",
     "node-fetch": "^2.6.7",
     "node-notifier": "^10.0.1",
-    "zuid": "github:zesty-io/zuid-js#v1.2.0"
+    "zuid": "github:zesty-io/zuid-js#v1.2.1"
   },
   "devDependencies": {
     "@oclif/test": "^2",
