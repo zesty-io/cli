@@ -34,18 +34,18 @@ export default class CreateInstance extends Command {
         this.sdk.setInstance(instance.data.ZUID)
         this.log(`Created instance: ${name}`)
 
-        // TODO: this needs to get moved into the SDK
-        // set blueprint to bootstrap
-        this.log(`Setting instance blueprint`)
-        await fetch(`https://accounts.api.zesty.io/v1/instances/${instance.data.ZUID}/blueprints`, {
-          method: "PUT",
+        this.log(`Installing NextJS Marketing Template`)
+          await fetch(`https://installer-xytrmaqk4a-uc.a.run.app/install`, {    
+          method: "POST",
           headers: {
             'Authorization': `Bearer ${this.sdk.token}`,
             'Content-Type': "application/json"
           },
-          body: JSON.stringify({ "zuid": "14-64329e0-555645" })
+          body: JSON.stringify({ 
+            "instance_zuid": instance.data.ZUID,
+            "repository": "https://github.com/zesty-io/template-nextjs-marketing"
+          })
         })
-
       } else {
         this.warn(`Failed to create instance.`)
       }
